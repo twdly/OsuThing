@@ -5,7 +5,7 @@
 @inject IHttpClientFactory ClientFactory
 
 <PageTitle>osu! gaming time</PageTitle>
-<h3>osu!</h3>
+<h2>osu!</h2>
 <p>Number of scores:</p>
 <input type="text" @bind-value="_scoreCount" @bind-value:event="oninput"/>
 <button @onclick="GetScores" disabled="@(_vexo == null || _scoreCount == null || _scoreCount <= 0)">Get scores</button>
@@ -18,15 +18,18 @@
 {
     @foreach (var score in _scores)
     {
-        <h1>@score.BeatmapSet!.Title</h1>
-        @if (score.Pp == null)
-        {
-            <p>Accuracy of @score.GetRoundedAccuracy()% and max combo of @score.MaxCombo but no PP :(</p>
-        }
-        else
-        {
-            <p>Accuracy of @score.GetRoundedAccuracy()% and max combo of @score.MaxCombo for a PP value of @score.Pp</p>
-        }
+        <div>
+            <img src="@score.BeatmapSet!.Covers?.Cover" alt="Beatmap image for @score.BeatmapSet!.Title"/>
+            <h3>@score.BeatmapSet!.Title</h3>
+            @if (score.Pp == null)
+            {
+                <p>Accuracy of @score.GetRoundedAccuracy()% and max combo of @score.MaxCombo but no PP :(</p>
+            }
+            else
+            {
+                <p>Accuracy of @score.GetRoundedAccuracy()% and max combo of @score.MaxCombo for a PP value of @score.Pp</p>
+            }
+        </div>
     } 
 }
 
@@ -47,7 +50,7 @@
     {
         if (_vexo != null && _scoreCount != null)
         {
-            _scores = await ScoreService.GetUserScores(ClientFactory, _vexo, "13047286", _scoreType, _scoreCount.Value);
+            _scores = await ScoreService.GetUserScores(ClientFactory, _vexo, "19618895", _scoreType, _scoreCount.Value);
         }
         if (_scores != null)
         {
