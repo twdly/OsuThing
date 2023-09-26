@@ -9,7 +9,7 @@ public class AuthenticationService
     public static async Task<AuthenticationModel?> Authenticate()
     {
         // First line is client_id, second line is client_secret
-        string[] apiKeys = await File.ReadAllLinesAsync("apikeys");
+        var apiKeys = await File.ReadAllLinesAsync("apikey");
         var values = new Dictionary<string, string>
         {
             { "client_id", apiKeys[0] },

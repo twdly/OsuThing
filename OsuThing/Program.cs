@@ -11,6 +11,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<AuthenticationService>();
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddSingleton<ScoreService>();
 
 var app = builder.Build();
 

@@ -4,13 +4,12 @@
 
 <PageTitle>osu! gaming time</PageTitle>
 <h3>Osu</h3>
+<p>Number of scores:</p>
+<input type="text" @bind-value="_scoreCount" @bind-value:event="oninput"/>
+<button @onclick="GetScores" disabled="@(_vexo == null)">Get scores</button>
 @if (_vexo == null)
 {
     <p>Loading...</p>
-}
-else
-{
-    <p>Response is @_vexo.ExpiresIn</p>
 }
 @if (_scores != null)
 {
@@ -32,10 +31,16 @@ else
 {
     AuthenticationModel? _vexo;
     IEnumerable<ScoreModel>? _scores;
+    int _scoreCount;
 
     protected override async Task OnInitializedAsync()
     {
         _vexo = await AuthenticationService.Authenticate();
-        if (_vexo != null) _scores = await ScoreService.GetUserScores(_vexo, "13047286", "best", 15);
+    }
+
+    private async void GetScores()
+    {
+        if (_vexo != null) _scores = await ScoreService.GetUserScores(_vexo, "13047286", "best", _scoreCount);
+        StateHasChanged();
     }
 }
