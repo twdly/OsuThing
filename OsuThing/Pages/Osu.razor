@@ -2,11 +2,14 @@
 @using OsuThing.Services
 @using OsuThing.Models
 
+@inject IHttpClientFactory ClientFactory
+
 <PageTitle>osu! gaming time</PageTitle>
-<h3>Osu</h3>
+<h3>osu!</h3>
 <p>Number of scores:</p>
 <input type="text" @bind-value="_scoreCount" @bind-value:event="oninput"/>
-<button @onclick="GetScores" disabled="@(_vexo == null)">Get scores</button>
+<button @onclick="GetScores" disabled="@(_vexo == null || _scoreCount == null || _scoreCount <= 0)">Get scores</button>
+<p>@_scoresMessage</p>
 @if (_vexo == null)
 {
     <p>Loading...</p>
@@ -31,7 +34,9 @@
 {
     AuthenticationModel? _vexo;
     IEnumerable<ScoreModel>? _scores;
-    int _scoreCount;
+    string _scoresMessage = "";
+    string _scoreType = "best";
+    int? _scoreCount;
 
     protected override async Task OnInitializedAsync()
     {
@@ -40,7 +45,15 @@
 
     private async void GetScores()
     {
-        if (_vexo != null) _scores = await ScoreService.GetUserScores(_vexo, "13047286", "best", _scoreCount);
+        if (_vexo != null && _scoreCount != null)
+        {
+            _scores = await ScoreService.GetUserScores(ClientFactory, _vexo, "13047286", _scoreType, _scoreCount.Value);
+        }
+        if (_scores != null)
+        {
+            var foundScoreCount = _scores.Count();
+            _scoresMessage = foundScoreCount == 0 ? "No scores have been found" : $"The {foundScoreCount} {_scoreType} scores have been found";
+        }
         StateHasChanged();
     }
 }

@@ -9,7 +9,7 @@ public class ScoreService
 {
     private const string Endpoint = "https://osu.ppy.sh/api/v2/";
     
-    public static async Task<IEnumerable<ScoreModel>?> GetUserScores(AuthenticationModel auth, string userName, string type, int count)
+    public static async Task<IEnumerable<ScoreModel>?> GetUserScores(IHttpClientFactory clientFactory, AuthenticationModel auth, string userName, string type, int count)
     {
         var requestParams = $"users/{userName}/scores/{type}";
         var builder = new UriBuilder(Endpoint + requestParams);
@@ -22,8 +22,8 @@ public class ScoreService
         request.Content = new StringContent("application/json");
         request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
         request.Headers.Add("Authorization", $"Bearer {auth.AccessToken}");
-        
-        var client = new HttpClient();
+
+        var client = clientFactory.CreateClient();
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         var response = await client.SendAsync(request);
         var responseString = await response.Content.ReadAsStringAsync();
