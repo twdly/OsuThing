@@ -6,11 +6,28 @@
 
 <PageTitle>osu! gaming time</PageTitle>
 <h2>osu!</h2>
-<p>Number of scores:</p>
-<input type="text" @bind-value="_scoreCount" @bind-value:event="oninput"/>
-<button @onclick="GetScores" disabled="@(_vexo == null || _scoreCount == null || _scoreCount <= 0)">Get scores</button>
-<p>@_scoresMessage</p>
-@if (_vexo == null)
+
+<div class="user-input">
+    <input type="text" @oninput="args => FindUser(args.Value?.ToString())"/>
+    @if (_user is {Username: not null })
+    {
+        <p>Current user:</p>
+        <h4>@_user.Username</h4>
+        <img src="@_user.Avatar" alt="Avatar for @_user.Username" class="avatar"/>
+    }
+</div>
+<div class="score-input">
+    <p>Number of scores:</p>
+    <input type="text" @bind-value="_scoreCount" @bind-value:event="oninput"/>
+    <button @onclick="GetScores" disabled="@(_authentication == null || _scoreCount == null || _scoreCount <= 0)">Get scores</button>
+    <ul class="button-group">
+        <button>Top</button>
+        <button>Recent</button>
+        <button>First</button>
+    </ul>
+    <p>@_scoresMessage</p>
+</div>
+@if (_authentication == null)
 {
     <p>Loading...</p>
 }
@@ -19,7 +36,7 @@
     @foreach (var score in _scores)
     {
         <div>
-            <img src="@score.BeatmapSet!.Covers?.Cover" alt="Beatmap image for @score.BeatmapSet!.Title"/>
+            <img src="@score.BeatmapSet!.Covers?.Cover" alt="Beatmap image for @score.BeatmapSet!.Title" class="cover-img"/>
             <h3>@score.BeatmapSet!.Title</h3>
             @if (score.Pp == null)
             {
@@ -35,27 +52,37 @@
 
 @code
 {
-    AuthenticationModel? _vexo;
+    AuthenticationModel? _authentication;
     IEnumerable<ScoreModel>? _scores;
+    UserModel? _user;
     string _scoresMessage = "";
     string _scoreType = "best";
     int? _scoreCount;
 
     protected override async Task OnInitializedAsync()
     {
-        _vexo = await AuthenticationService.Authenticate();
+        _authentication = await AuthenticationService.Authenticate();
     }
 
     private async void GetScores()
     {
-        if (_vexo != null && _scoreCount != null)
+        if (_authentication != null && _scoreCount != null && _user != null)
         {
-            _scores = await ScoreService.GetUserScores(ClientFactory, _vexo, "19618895", _scoreType, _scoreCount.Value);
+            _scores = await ScoreService.GetUserScores(ClientFactory, _authentication, _user.Id.ToString(), _scoreType, _scoreCount.Value);
         }
         if (_scores != null)
         {
             var foundScoreCount = _scores.Count();
             _scoresMessage = foundScoreCount == 0 ? "No scores have been found" : $"The {foundScoreCount} {_scoreType} scores have been found";
+        }
+        StateHasChanged();
+    }
+
+    private async void FindUser(string? input)
+    {
+        if (_authentication != null && input != null)
+        {
+            _user = await UserService.FindUser(ClientFactory, _authentication, input);
         }
         StateHasChanged();
     }
