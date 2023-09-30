@@ -23,10 +23,11 @@
     <input type="text" @bind-value="_scoreCount" @bind-value:event="oninput"/>
     <button @onclick="GetScores" disabled="@IsScoreButtonDisabled()">Get scores</button>
     <ul class="button-group">
-        <button>Top</button>
-        <button>Recent</button>
-        <button>First</button>
+        <button @onclick="() => SetScoreType(Best)">Best</button>
+        <button @onclick="() => SetScoreType(Recent)">Recent</button>
+        <button @onclick="() => SetScoreType(Firsts)">Firsts</button>
     </ul>
+    <p>Current selection: @CapitaliseString(_scoreType)</p>
     <p>@_scoresMessage</p>
 </div>
 @if (_authentication == null)
@@ -38,9 +39,9 @@
     @foreach (var score in _scores)
     {
         <div>
-            <img src="@score.BeatmapSet!.Covers?.Cover" alt="Beatmap image for @score.BeatmapSet!.Title" class="cover-img"/>
+            <img src="@score.BeatmapSet.Covers.Cover" alt="Beatmap image for @score.BeatmapSet.Title" class="cover-img"/>
             <h3>
-                <a href="https://osu.ppy.sh/beatmapsets/@score.BeatmapSet!.Id/#osu/@score.Beatmap!.DiffId">@score.BeatmapSet!.Title
+                <a href="https://osu.ppy.sh/beatmapsets/@score.BeatmapSet.Id/#osu/@score.Beatmap.DiffId">@score.BeatmapSet.Title
                     <span class="diffName"> - [@score.Beatmap.DiffName]</span>
                 </a>
             </h3>
@@ -59,6 +60,10 @@
 
 @code
 {
+    const string Best = "best";
+    const string Recent = "recent";
+    const string Firsts = "firsts";
+    
     AuthenticationModel? _authentication;
     IEnumerable<ScoreModel>? _scores;
     UserModel? _user;
@@ -96,6 +101,18 @@
 
     private bool IsScoreButtonDisabled()
     {
-        return _authentication == null || _scoreCount == null || _scoreCount <= 0 || _user == null;
+        return _authentication == null || _scoreCount == null || _scoreCount <= 0 || _user?.Username == null;
+    }
+
+    private void SetScoreType(string type)
+    {
+        _scoreType = type;
+    }
+
+    private string CapitaliseString(string stringToCapitalise)
+    {
+        var capital = stringToCapitalise[0];
+        var remaining = stringToCapitalise[1..];
+        return char.ToUpper(capital) + remaining;
     }
 }

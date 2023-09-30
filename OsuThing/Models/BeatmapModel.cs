@@ -4,8 +4,8 @@ namespace OsuThing.Models;
 
 public class BeatmapModel
 {
-    [JsonPropertyName("beatmapset_id")] public int? SetId { get; set; }
-    [JsonPropertyName("id")] public int? DiffId { get; set; }
-    [JsonPropertyName("difficulty_rating")] public float Difficulty { get; set; }
-    [JsonPropertyName("version")] public string? DiffName { get; set; }
+    [JsonPropertyName("beatmapset_id")] public required int SetId { get; set; }
+    [JsonPropertyName("id")] public required int DiffId { get; set; }
+    [JsonPropertyName("difficulty_rating")] public required float Difficulty { get; set; }
+    [JsonPropertyName("version")] public required string DiffName { get; set; }
 }

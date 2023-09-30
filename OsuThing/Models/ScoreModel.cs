@@ -4,9 +4,10 @@ namespace OsuThing.Models;
 
 public class ScoreModel
 {
-    [JsonPropertyName("accuracy")] public double Accuracy { get; set; }
+
+    [JsonPropertyName("accuracy")] public required double Accuracy { get; set; }
     [JsonPropertyName("pp")] public double? Pp { get; set; }
-    [JsonPropertyName("max_combo")] public int MaxCombo { get; set; }
+    [JsonPropertyName("max_combo")] public required int MaxCombo { get; set; }
     [JsonPropertyName("beatmap")] public required BeatmapModel Beatmap { get; set; }
     [JsonPropertyName("beatmapset")] public required BeatmapSetModel BeatmapSet { get; set; }
     [JsonPropertyName("mods")] public required List<string> Mods { get; set; }
