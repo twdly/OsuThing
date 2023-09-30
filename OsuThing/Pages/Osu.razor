@@ -21,7 +21,7 @@
 <div class="score-input">
     <p>Number of scores:</p>
     <input type="text" @bind-value="_scoreCount" @bind-value:event="oninput"/>
-    <button @onclick="GetScores" disabled="@(_authentication == null || _scoreCount == null || _scoreCount <= 0)">Get scores</button>
+    <button @onclick="GetScores" disabled="@IsScoreButtonDisabled()">Get scores</button>
     <ul class="button-group">
         <button>Top</button>
         <button>Recent</button>
@@ -41,9 +41,10 @@
             <img src="@score.BeatmapSet!.Covers?.Cover" alt="Beatmap image for @score.BeatmapSet!.Title" class="cover-img"/>
             <h3>
                 <a href="https://osu.ppy.sh/beatmapsets/@score.BeatmapSet!.Id/#osu/@score.Beatmap!.DiffId">@score.BeatmapSet!.Title
-                <span class="diffName"> - [@score.Beatmap.DiffName]</span>
+                    <span class="diffName"> - [@score.Beatmap.DiffName]</span>
                 </a>
             </h3>
+            <p>@score.Beatmap.Difficulty* (@score.GetModsAsString())</p>
             @if (score.Pp == null)
             {
                 <p>Accuracy of @score.GetRoundedAccuracy()% and max combo of @score.MaxCombo but no PP :(</p>
@@ -91,5 +92,10 @@
             _user = await UserService.FindUser(ClientFactory, _authentication, input);
         }
         StateHasChanged();
+    }
+
+    private bool IsScoreButtonDisabled()
+    {
+        return _authentication == null || _scoreCount == null || _scoreCount <= 0 || _user == null;
     }
 }

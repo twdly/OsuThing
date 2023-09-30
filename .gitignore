@@ -1,3 +1,5 @@
 apikey
 OsuThing/bin
 OsuThing/obj
+.vs
+OsuThing.csproj.user
