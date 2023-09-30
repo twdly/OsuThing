@@ -12,8 +12,10 @@
     @if (_user is {Username: not null })
     {
         <p>Current user:</p>
-        <h4>@_user.Username</h4>
-        <img src="@_user.Avatar" alt="Avatar for @_user.Username" class="avatar"/>
+        <a href="https://osu.ppy.sh/users/@_user.Id">
+            <h4>@_user.Username</h4>
+            <img src="@_user.Avatar" alt="Avatar for @_user.Username" class="avatar"/>
+        </a>
     }
 </div>
 <div class="score-input">
