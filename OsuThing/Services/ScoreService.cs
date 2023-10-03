@@ -1,6 +1,7 @@
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Web;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using OsuThing.Models;
 
 namespace OsuThing.Services;
@@ -28,5 +29,10 @@ public class ScoreService
         var response = await client.SendAsync(request);
         var responseString = await response.Content.ReadAsStringAsync();
         return JsonSerializer.Deserialize<IEnumerable<ScoreModel>>(responseString);
+    }
+
+    public static async Task<ScoreModel> GetBeatmapScore()
+    {
+        throw new NotImplementedException();
     }
 }

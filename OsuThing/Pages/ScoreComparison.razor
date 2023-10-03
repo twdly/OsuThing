@@ -1,0 +1,90 @@
+@page "/comparison"
+@using OsuThing.Models
+@using OsuThing.Services
+
+@inject IHttpClientFactory ClientFactory
+
+<PageTitle>Score Comparison</PageTitle>
+
+<h2>Score Comparison</h2>
+
+<div class="user-input">
+    <input type="text" placeholder="User one:" @oninput="args => FindUser(args.Value?.ToString(), 1)"/>
+    @if (_user1 is {Username: not null })
+    {
+        <p>Current user:</p>
+        <a href="https://osu.ppy.sh/users/@_user1.Id">
+            <h4>@_user1.Username</h4>
+            <img src="@_user1.Avatar" alt="Avatar for @_user1.Username" class="avatar"/>
+        </a>
+    }
+</div>
+<div class="user-input">
+    <input type="text" placeholder="User two:" @oninput="args => FindUser(args.Value?.ToString(), 2)"/>
+    @if (_user2 is {Username: not null})
+    {
+        <p>Current user:</p>
+        <a href="https://osu.ppy.sh/users/@_user2.Id">
+            <h4>@_user2.Username</h4>
+            <img src="@_user2.Avatar" alt="Avatar for @_user2.Username" class="avatar"/>
+        </a>
+    }
+</div>
+<div class="map-input">
+    <input type="text" @bind="_mapId" placeholder="Beatmap ID:"/>
+    <input type="button" value="Get Scores" @onclick="FindMapAndScores"/>
+</div>
+<div class="score-display">
+@if (_getScoreButtonClicked)
+{    
+    @if (_score1 != null && _getScoreButtonClicked)
+    {
+        <p>@_score1.Score</p>
+    }
+    else
+    {
+        <p>@_user1.Username has set a score on this map.</p>
+    }
+}
+
+</div> 
+
+
+@code
+{
+    UserModel? _user1;
+    UserModel? _user2;
+    ScoreModel? _score1;
+    AuthenticationModel? _authentication;
+    int? _mapId;
+    bool _getScoreButtonClicked = false;
+    
+    private async void FindUser(string? input, int userNo)
+    {
+        if (_authentication != null && input != null)
+        {
+            var foundUser = await UserService.FindUser(ClientFactory, _authentication, input);
+            switch (userNo)
+            {
+                case 1:
+                    _user1 = foundUser;
+                    break;
+                case 2:
+                    _user2 = foundUser;
+                    break;
+            }
+        }
+        StateHasChanged();
+    }
+    
+    private async void FindMapAndScores()
+    {
+        _getScoreButtonClicked = true;
+        await ScoreService.GetBeatmapScore();
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _authentication = await AuthenticationService.Authenticate();
+    }
+}

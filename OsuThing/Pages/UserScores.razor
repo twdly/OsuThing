@@ -1,10 +1,10 @@
-@page "/among"
+@page "/userScores"
 @using OsuThing.Services
 @using OsuThing.Models
 
 @inject IHttpClientFactory ClientFactory
 
-<PageTitle>osu! gaming time</PageTitle>
+<PageTitle>User Scores</PageTitle>
 <h2>osu!</h2>
 
 <div class="user-input">
@@ -69,7 +69,7 @@
     UserModel? _user;
     string _scoresMessage = "";
     string _scoreType = "best";
-    int? _scoreCount;
+    int? _scoreCount = 100;
 
     protected override async Task OnInitializedAsync()
     {
@@ -109,7 +109,7 @@
         _scoreType = type;
     }
 
-    private string CapitaliseString(string stringToCapitalise)
+    private static string CapitaliseString(string stringToCapitalise)
     {
         var capital = stringToCapitalise[0];
         var remaining = stringToCapitalise[1..];

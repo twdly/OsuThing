@@ -11,6 +11,7 @@ public class ScoreModel
     [JsonPropertyName("beatmap")] public required BeatmapModel Beatmap { get; set; }
     [JsonPropertyName("beatmapset")] public required BeatmapSetModel BeatmapSet { get; set; }
     [JsonPropertyName("mods")] public required List<string> Mods { get; set; }
+    [JsonPropertyName("score")] public required int Score { get; set; }
 
     public double GetRoundedAccuracy()
     {
