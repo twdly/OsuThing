@@ -37,13 +37,13 @@
 <div class="score-display">
 @if (_getScoreButtonClicked)
 {    
-    @if (_score1 != null && _getScoreButtonClicked)
+    @if (_score1 != null)
     {
-        <p>@_score1.Score</p>
+        <p>@_score1.Score.Score</p>
     }
     else
     {
-        <p>@_user1.Username has set a score on this map.</p>
+        <p>@_user1!.Username has not set a score on this map.</p>
     }
 }
 
@@ -54,10 +54,10 @@
 {
     UserModel? _user1;
     UserModel? _user2;
-    ScoreModel? _score1;
+    UserScoreModel? _score1;
     AuthenticationModel? _authentication;
     int? _mapId;
-    bool _getScoreButtonClicked = false;
+    bool _getScoreButtonClicked;
     
     private async void FindUser(string? input, int userNo)
     {
@@ -80,7 +80,8 @@
     private async void FindMapAndScores()
     {
         _getScoreButtonClicked = true;
-        await ScoreService.GetBeatmapScore();
+        _score1 = await ScoreService.GetBeatmapScore(ClientFactory, _authentication!, 1486738, _user1!.Id);
+        StateHasChanged();
     }
     
     protected override async Task OnInitializedAsync()

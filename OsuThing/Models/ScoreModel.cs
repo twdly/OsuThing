@@ -9,7 +9,7 @@ public class ScoreModel
     [JsonPropertyName("pp")] public double? Pp { get; set; }
     [JsonPropertyName("max_combo")] public required int MaxCombo { get; set; }
     [JsonPropertyName("beatmap")] public required BeatmapModel Beatmap { get; set; }
-    [JsonPropertyName("beatmapset")] public required BeatmapSetModel BeatmapSet { get; set; }
+    [JsonPropertyName("beatmapset")] public BeatmapSetModel? BeatmapSet { get; set; }
     [JsonPropertyName("mods")] public required List<string> Mods { get; set; }
     [JsonPropertyName("score")] public required int Score { get; set; }
 
