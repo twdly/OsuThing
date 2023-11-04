@@ -1,6 +1,4 @@
 @page "/comparison"
-@using OsuThing.Models
-@using OsuThing.Services
 
 @inject IHttpClientFactory ClientFactory
 
@@ -37,55 +35,22 @@
 <div class="score-display">
 @if (_getScoreButtonClicked)
 {    
-    @if (_score1 != null)
+    @if (_score1 != null && _user1 != null)
     {
-        <p>@_score1.Score.Score</p>
+        <img src="@_beatmapSet?.Covers.Cover" alt="Beatmap image for @_beatmapSet?.Title"/>
+        <p>@_user1.Username has a score of @_score1.Score.Score</p>
     }
     else
     {
         <p>@_user1!.Username has not set a score on this map.</p>
     }
-}
-
-</div> 
-
-
-@code
-{
-    UserModel? _user1;
-    UserModel? _user2;
-    UserScoreModel? _score1;
-    AuthenticationModel? _authentication;
-    int? _mapId;
-    bool _getScoreButtonClicked;
-    
-    private async void FindUser(string? input, int userNo)
+    @if (_score2 != null && _user2 != null)
     {
-        if (_authentication != null && input != null)
-        {
-            var foundUser = await UserService.FindUser(ClientFactory, _authentication, input);
-            switch (userNo)
-            {
-                case 1:
-                    _user1 = foundUser;
-                    break;
-                case 2:
-                    _user2 = foundUser;
-                    break;
-            }
-        }
-        StateHasChanged();
+        <p>@_user2.Username has a score of @_score2.Score.Score</p>
     }
-    
-    private async void FindMapAndScores()
+    else
     {
-        _getScoreButtonClicked = true;
-        _score1 = await ScoreService.GetBeatmapScore(ClientFactory, _authentication!, 1486738, _user1!.Id);
-        StateHasChanged();
-    }
-    
-    protected override async Task OnInitializedAsync()
-    {
-        _authentication = await AuthenticationService.Authenticate();
+        <p>@_user2!.Username has not set a score on this map.</p>
     }
 }
+</div>

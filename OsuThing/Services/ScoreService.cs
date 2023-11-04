@@ -47,6 +47,14 @@ public class ScoreService
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         var response = await client.SendAsync(request);
         var responseString = await response.Content.ReadAsStringAsync();
-        return JsonSerializer.Deserialize<UserScoreModel>(responseString);
+        try
+        {
+            return JsonSerializer.Deserialize<UserScoreModel>(responseString);
+        }
+        catch (JsonException e)
+        {
+            Console.WriteLine(e.StackTrace);
+            return null;
+        }
     }
 }
