@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using OsuThing.Data;
 using OsuThing.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +7,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<AuthenticationService>();
-builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddSingleton<ScoreService>();
 builder.Services.AddSingleton<UserService>();

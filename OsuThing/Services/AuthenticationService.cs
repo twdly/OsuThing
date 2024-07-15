@@ -1,11 +1,16 @@
 using System.Text.Json;
-using Microsoft.AspNetCore.Http.Json;
 using OsuThing.Models;
 
 namespace OsuThing.Services;
 
 public class AuthenticationService
 {
+    private static readonly JsonSerializerOptions Options = new()
+    {
+        PropertyNameCaseInsensitive = false,
+        IncludeFields = true
+    };
+    
     public static async Task<AuthenticationModel?> Authenticate()
     {
         // First line is client_id, second line is client_secret
@@ -18,18 +23,12 @@ public class AuthenticationService
             {"scope", "public"}
         };
         
-        var options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = false,
-            IncludeFields = true
-        };
-        
         var content = new FormUrlEncodedContent(values);
         var client = new HttpClient();
         
         var response = await client.PostAsync("https://osu.ppy.sh/oauth/token", content);
         var jsonModel = await response.Content.ReadAsStringAsync();
         
-        return JsonSerializer.Deserialize<AuthenticationModel>(jsonModel, options);
+        return JsonSerializer.Deserialize<AuthenticationModel>(jsonModel, Options);
     }
 }
