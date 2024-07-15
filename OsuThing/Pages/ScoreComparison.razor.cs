@@ -40,7 +40,10 @@ public partial class ScoreComparison
         {
             _score1 = await ScoreService.GetBeatmapScore(ClientFactory, _authentication!, (int)_mapId, _user1!.Id);
             _score2 = await ScoreService.GetBeatmapScore(ClientFactory, _authentication!, (int)_mapId, _user2!.Id);
-            _beatmapSet = await BeatmapService.GetSetFromId(ClientFactory, _authentication!, _score1.Score.Beatmap.SetId);
+            if (_score1 != null)
+            {
+                _beatmapSet = await BeatmapService.GetSetFromId(ClientFactory, _authentication!, _score1.Score.Beatmap.SetId);
+            }
         }
         StateHasChanged();
     }
