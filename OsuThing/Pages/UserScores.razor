@@ -38,26 +38,7 @@
 {
     @foreach (var score in _scores)
     {
-        <div>
-            @if (score.BeatmapSet != null)
-            {
-                <img src="@score.BeatmapSet.Covers.Cover" alt="Beatmap image for @score.BeatmapSet.Title" class="cover-img"/>
-                <h3>
-                    <a href="https://osu.ppy.sh/beatmapsets/@score.BeatmapSet.Id/#osu/@score.Beatmap.DiffId">@score.BeatmapSet.Title
-                        <span class="diffName"> - [@score.Beatmap.DiffName]</span>
-                    </a>
-                </h3>
-            }
-            <p>@score.Beatmap.Difficulty* (@score.GetModsAsString())</p>
-            @if (score.Pp == null)
-            {
-                <p>Accuracy of @score.GetRoundedAccuracy()% and max combo of @score.MaxCombo but no PP :(</p>
-            }
-            else
-            {
-                <p>Accuracy of @score.GetRoundedAccuracy()% and max combo of @score.MaxCombo for a PP value of @score.Pp</p>
-            }
-        </div>
+        <UserScore Score="score"/>
     } 
 }
 
