@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components;
 using OsuThing.Models;
 using OsuThing.Services;
 
@@ -5,6 +6,9 @@ namespace OsuThing.Pages;
 
 public partial class UserScores
 {
+    [Inject]
+    private ScoreService? ScoreService { get; set; }
+    
     private const string Best = "best";
     private const string Recent = "recent";
     private const string Firsts = "firsts";
@@ -25,7 +29,7 @@ public partial class UserScores
     {
         if (_authentication != null && _scoreCount != null && _user != null)
         {
-            _scores = await ScoreService.GetUserScores(ClientFactory, _authentication, _user.Id.ToString(), _scoreType, _scoreCount.Value) ?? [];
+            _scores = await ScoreService!.GetUserScores(_authentication, _user.Id.ToString(), _scoreType, _scoreCount.Value) ?? [];
         }
         var foundScoreCount = _scores.Count();
         _scoresMessage = foundScoreCount == 0
