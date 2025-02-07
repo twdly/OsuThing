@@ -1,6 +1,4 @@
 @page "/userScores"
-@using OsuThing.Services
-@using OsuThing.Models
 
 @inject IHttpClientFactory ClientFactory
 
@@ -34,69 +32,7 @@
 {
     <p>Loading...</p>
 }
-@if (_scores != null)
+@foreach (var score in _scores)
 {
-    @foreach (var score in _scores)
-    {
-        <UserScore Score="score"/>
-    } 
-}
-
-@code
-{
-    const string Best = "best";
-    const string Recent = "recent";
-    const string Firsts = "firsts";
-    
-    AuthenticationModel? _authentication;
-    IEnumerable<ScoreModel>? _scores;
-    UserModel? _user;
-    string _scoresMessage = "";
-    string _scoreType = "best";
-    int? _scoreCount = 100;
-
-    protected override async Task OnInitializedAsync()
-    {
-        _authentication = await AuthenticationService.Authenticate();
-    }
-
-    private async void GetScores()
-    {
-        if (_authentication != null && _scoreCount != null && _user != null)
-        {
-            _scores = await ScoreService.GetUserScores(ClientFactory, _authentication, _user.Id.ToString(), _scoreType, _scoreCount.Value);
-        }
-        if (_scores != null)
-        {
-            var foundScoreCount = _scores.Count();
-            _scoresMessage = foundScoreCount == 0 ? "No scores have been found" : $"The {foundScoreCount} {_scoreType} scores have been found";
-        }
-        StateHasChanged();
-    }
-
-    private async void FindUser(string? input)
-    {
-        if (_authentication != null && input != null)
-        {
-            _user = await UserService.FindUser(ClientFactory, _authentication, input);
-        }
-        StateHasChanged();
-    }
-
-    private bool IsScoreButtonDisabled()
-    {
-        return _authentication == null || _scoreCount == null || _scoreCount <= 0 || _user?.Username == null;
-    }
-
-    private void SetScoreType(string type)
-    {
-        _scoreType = type;
-    }
-
-    private static string CapitaliseString(string stringToCapitalise)
-    {
-        var capital = stringToCapitalise[0];
-        var remaining = stringToCapitalise[1..];
-        return char.ToUpper(capital) + remaining;
-    }
+    <UserScore Score="score"/>
 }
