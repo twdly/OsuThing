@@ -6,11 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
-builder.Services.AddSingleton<AuthenticationService>();
 
+builder.Services.AddSingleton<AuthenticationService>();
 builder.Services.AddSingleton<ScoreService>();
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<BeatmapService>();
+builder.Services.AddSingleton<ApiService>();
 
 var app = builder.Build();
 

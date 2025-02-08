@@ -26,10 +26,6 @@
     <p>Current selection: @CapitaliseString(_scoreType)</p>
     <p>@_scoresMessage</p>
 </div>
-@if (_authentication == null)
-{
-    <p>Loading...</p>
-}
 @foreach (var score in _scores)
 {
     <UserScore Score="score"/>

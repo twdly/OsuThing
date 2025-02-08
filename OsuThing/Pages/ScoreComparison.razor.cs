@@ -28,7 +28,7 @@ public partial class ScoreComparison
     {
         if (_authentication != null && input != null)
         {
-            var foundUser = await UserService.FindUser(_authentication, input);
+            var foundUser = await UserService.FindUser(input);
             switch (userNo)
             {
                 case 1:
@@ -47,11 +47,11 @@ public partial class ScoreComparison
         _getScoreButtonClicked = true;
         if (_mapId != null)
         {
-            _score1 = await ScoreService!.GetBeatmapScore(_authentication!, (int)_mapId, _user1!.Id);
-            _score2 = await ScoreService!.GetBeatmapScore(_authentication!, (int)_mapId, _user2!.Id);
+            _score1 = await ScoreService!.GetBeatmapScore((int)_mapId, _user1!.Id);
+            _score2 = await ScoreService!.GetBeatmapScore((int)_mapId, _user2!.Id);
             if (_score1 != null)
             {
-                _beatmapSet = await BeatmapService.GetSetFromId(_authentication!, _score1.Score.Beatmap.SetId);
+                _beatmapSet = await BeatmapService.GetSetFromId(_score1.Score.Beatmap.SetId);
             }
         }
         StateHasChanged();
