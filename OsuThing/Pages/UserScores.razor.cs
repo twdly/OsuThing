@@ -6,8 +6,9 @@ namespace OsuThing.Pages;
 
 public partial class UserScores
 {
-    [Inject]
-    private ScoreService? ScoreService { get; set; }
+    [Inject] private ScoreService? ScoreService { get; set; }
+    [Inject] private UserService? UserService { get; set; }
+    [Inject] private AuthenticationService? AuthenticationService { get; set; }
     
     private const string Best = "best";
     private const string Recent = "recent";
@@ -42,7 +43,7 @@ public partial class UserScores
     {
         if (_authentication != null && input != null)
         {
-            _user = await UserService.FindUser(ClientFactory, _authentication, input);
+            _user = await UserService.FindUser(_authentication, input);
         }
         StateHasChanged();
     }

@@ -5,11 +5,13 @@ using OsuThing.Models;
 
 namespace OsuThing.Services;
 
-public class UserService
+public class UserService(IHttpClientFactory clientFactory)
 {
+    private IHttpClientFactory ClientFactory { get; } = clientFactory;
+
     private const string Endpoint = "https://osu.ppy.sh/api/v2/";
     
-    public static async Task<UserModel?> FindUser(IHttpClientFactory clientFactory, AuthenticationModel auth, string? userName)
+    public async Task<UserModel?> FindUser(AuthenticationModel auth, string? userName)
     {
         var requestParams = $"users/{userName}/osu";
         var builder = new UriBuilder(Endpoint + requestParams);
@@ -22,7 +24,7 @@ public class UserService
         request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
         request.Headers.Add("Authorization", $"Bearer {auth.AccessToken}");
 
-        var client = clientFactory.CreateClient();
+        var client = ClientFactory.CreateClient();
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         var response = await client.SendAsync(request);
         var responseString = await response.Content.ReadAsStringAsync();

@@ -7,8 +7,13 @@ namespace OsuThing.Pages;
 // ReSharper disable once UnusedType.Global
 public partial class ScoreComparison
 {
-    [Inject]
-    private ScoreService? ScoreService { get; set; }
+    [Inject] private ScoreService? ScoreService { get; set; }
+
+    [Inject] private UserService? UserService { get; set; }
+    
+    [Inject] private BeatmapService? BeatmapService { get; set; }
+    
+    [Inject] private AuthenticationService? AuthenticationService { get; set; }
     
     private UserModel? _user1;
     private UserModel? _user2;
@@ -23,7 +28,7 @@ public partial class ScoreComparison
     {
         if (_authentication != null && input != null)
         {
-            var foundUser = await UserService.FindUser(ClientFactory, _authentication, input);
+            var foundUser = await UserService.FindUser(_authentication, input);
             switch (userNo)
             {
                 case 1:
@@ -46,7 +51,7 @@ public partial class ScoreComparison
             _score2 = await ScoreService!.GetBeatmapScore(_authentication!, (int)_mapId, _user2!.Id);
             if (_score1 != null)
             {
-                _beatmapSet = await BeatmapService.GetSetFromId(ClientFactory, _authentication!, _score1.Score.Beatmap.SetId);
+                _beatmapSet = await BeatmapService.GetSetFromId(_authentication!, _score1.Score.Beatmap.SetId);
             }
         }
         StateHasChanged();

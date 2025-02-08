@@ -3,15 +3,17 @@ using OsuThing.Models;
 
 namespace OsuThing.Services;
 
-public class AuthenticationService
+public class AuthenticationService(IHttpClientFactory clientFactory)
 {
+    private IHttpClientFactory ClientFactory { get; } = clientFactory;
+
     private static readonly JsonSerializerOptions Options = new()
     {
         PropertyNameCaseInsensitive = false,
         IncludeFields = true
     };
     
-    public static async Task<AuthenticationModel?> Authenticate()
+    public async Task<AuthenticationModel?> Authenticate()
     {
         // First line is client_id, second line is client_secret
         var apiKeys = await File.ReadAllLinesAsync("apikey");
@@ -24,7 +26,7 @@ public class AuthenticationService
         };
         
         var content = new FormUrlEncodedContent(values);
-        var client = new HttpClient();
+        var client = ClientFactory.CreateClient();
         
         var response = await client.PostAsync("https://osu.ppy.sh/oauth/token", content);
         var jsonModel = await response.Content.ReadAsStringAsync();
