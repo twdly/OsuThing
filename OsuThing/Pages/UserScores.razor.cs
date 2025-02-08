@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using OsuThing.Enums;
 using OsuThing.Models;
 using OsuThing.Services;
 
@@ -9,14 +10,10 @@ public partial class UserScores
     [Inject] private ScoreService ScoreService { get; set; } = null!;
     [Inject] private UserService UserService { get; set; } = null!;
     
-    private const string Best = "best";
-    private const string Recent = "recent";
-    private const string Firsts = "firsts";
-    
     private IEnumerable<ScoreModel> _scores = [];
     private UserModel? _user;
     private string _scoresMessage = "";
-    private string _scoreType = "best";
+    private UserScoreType _scoreType = UserScoreType.Best; // Default type is best as most players care primarily about the PP value of their score
     private int? _scoreCount = 100;
 
     private async void GetScores()
@@ -46,7 +43,7 @@ public partial class UserScores
         return _scoreCount == null || _scoreCount <= 0 || _user?.Username == null;
     }
 
-    private void SetScoreType(string type)
+    private void SetScoreType(UserScoreType type)
     {
         _scoreType = type;
     }

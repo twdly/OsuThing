@@ -1,5 +1,6 @@
 using System.Collections.Specialized;
 using System.Text.Json;
+using OsuThing.Enums;
 using OsuThing.Models;
 
 namespace OsuThing.Services;
@@ -8,9 +9,9 @@ public class ScoreService(ApiService apiService)
 {
     private ApiService ApiService { get; } = apiService;
     
-    public async Task<IEnumerable<ScoreModel>?> GetUserScores(string userName, string type, int count)
+    public async Task<IEnumerable<ScoreModel>?> GetUserScores(string userName, UserScoreType type, int count)
     {
-        var requestParams = $"users/{userName}/scores/{type}";
+        var requestParams = $"users/{userName}/scores/{type.ToString().ToLower()}";
         var query = new NameValueCollection
         {
             ["mode"] = "osu",

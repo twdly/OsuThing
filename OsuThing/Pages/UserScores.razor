@@ -1,4 +1,5 @@
 @page "/userScores"
+@using OsuThing.Enums
 
 <PageTitle>User Scores</PageTitle>
 <h2>osu!</h2>
@@ -19,11 +20,11 @@
     <input type="text" @bind-value="_scoreCount" @bind-value:event="oninput"/>
     <button @onclick="GetScores" disabled="@IsScoreButtonDisabled()">Get scores</button>
     <ul class="button-group">
-        <button @onclick="() => SetScoreType(Best)">Best</button>
-        <button @onclick="() => SetScoreType(Recent)">Recent</button>
-        <button @onclick="() => SetScoreType(Firsts)">Firsts</button>
+        <button @onclick="() => SetScoreType(UserScoreType.Best)">Best</button>
+        <button @onclick="() => SetScoreType(UserScoreType.Recent)">Recent</button>
+        <button @onclick="() => SetScoreType(UserScoreType.Firsts)">Firsts</button>
     </ul>
-    <p>Current selection: @CapitaliseString(_scoreType)</p>
+    <p>Current selection: @CapitaliseString(_scoreType.ToString())</p>
     <p>@_scoresMessage</p>
 </div>
 @foreach (var score in _scores)
