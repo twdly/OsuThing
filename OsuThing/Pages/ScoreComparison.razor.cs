@@ -7,13 +7,13 @@ namespace OsuThing.Pages;
 // ReSharper disable once UnusedType.Global
 public partial class ScoreComparison
 {
-    [Inject] private ScoreService? ScoreService { get; set; }
+    [Inject] private ScoreService ScoreService { get; set; } = null!;
 
-    [Inject] private UserService? UserService { get; set; }
+    [Inject] private UserService UserService { get; set; } = null!;
     
-    [Inject] private BeatmapService? BeatmapService { get; set; }
-    
-    [Inject] private AuthenticationService? AuthenticationService { get; set; }
+    [Inject] private BeatmapService BeatmapService { get; set; } = null!;
+
+    [Inject] private AuthenticationService AuthenticationService { get; set; } = null!;
     
     private UserModel? _user1;
     private UserModel? _user2;
