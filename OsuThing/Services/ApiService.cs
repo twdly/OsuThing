@@ -30,7 +30,7 @@ public class ApiService(IHttpClientFactory clientFactory, IAuthenticationService
         
         request.Content = new StringContent("application/json");
         request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
-        request.Headers.Add("Authorization", $"Bearer {auth.AccessToken}");
+        request.Headers.Add("Authorization", $"Bearer {auth!.AccessToken}");
 
         var client = ClientFactory.CreateClient();
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

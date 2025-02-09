@@ -1,0 +1,21 @@
+@page "/search"
+
+<PageTitle>User Scores</PageTitle>
+<h2>Beatmap search</h2>
+
+<input type="text" @bind="searchInput"/>
+<button @onclick="SearchForSets">Search</button>
+
+@if (BeatmapSets != null && BeatmapSets.Count() != 0)
+{
+    @foreach (var beatmapSet in BeatmapSets)
+    {
+        <div>
+            <h4>@beatmapSet.Title (@beatmapSet.Id)</h4>
+            @foreach (var diff in beatmapSet.Difficulties)
+            {
+                <p>@diff.DiffName - @diff.Difficulty*</p>
+            }
+        </div>
+    }
+}
