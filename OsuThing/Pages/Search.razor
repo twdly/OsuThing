@@ -5,6 +5,12 @@
     <PageTitle>User Scores</PageTitle>
     <h2>Beatmap search</h2>  
 }
+else
+{
+    <div @onclick="CloseSearch">
+        <a href="javascript:void(0);">&#60; Back</a>
+    </div>
+}
 
 
 <input type="text" @bind="SearchInput" @onkeyup="ClickSearchButton"/>
@@ -18,7 +24,16 @@
             <h4>@beatmapSet.Title (@beatmapSet.Id)</h4>
             @foreach (var diff in beatmapSet.Difficulties!)
             {
-                <p>@diff.DiffName - @diff.Difficulty*</p>
+                @if (IsChildComponent)
+                {
+                    <div @onclick="@(() => SelectDiff(diff.DiffId))">
+                        <a href="javascript:void(0);">@diff.DiffName - @diff.Difficulty*</a>
+                    </div>
+                }
+                else
+                {
+                    <p>@diff.DiffName - @diff.Difficulty*</p>
+                }
             }
         </div>
     }

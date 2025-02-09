@@ -26,16 +26,31 @@
         </a>
     }
 </div>
-<div class="map-input">
-    <input type="text" @bind="_mapId" placeholder="Beatmap ID:"/>
-    <input type="button" value="Get Scores" @onclick="FindMapAndScores"/>
-</div>
+@if (_searchButtonClicked)
+{
+    <Search IsChildComponent="true" CloseSearchCallback="@SearchClosed" SelectDiffCallback="GetMap"/>
+}
+else
+{
+    <button @onclick="SearchButtonClicked">Search for beatmap</button>
+}
+@if (_beatmapSet != null)
+{
+    <p>Selected map: @_beatmapSet.Title - @_beatmap.DiffName</p>
+}
+
+<button disabled="@IsGetButtonDisabled()" @onclick="FindScores">Get scores</button>
+
+@* <div class="map-input"> *@
+@*     <input type="text" @bind="_mapId" placeholder="Beatmap ID:"/> *@
+@*     <input type="button" value="Get Scores" @onclick="FindMapAndScores"/> *@
+@* </div> *@
 <div class="score-display">
 @if (_getScoreButtonClicked)
 {    
+    <img src="@_beatmapSet?.Covers.Cover" alt="Beatmap image for @_beatmapSet?.Title"/>
     @if (_score1 != null && _user1 != null)
     {
-        <img src="@_beatmapSet?.Covers.Cover" alt="Beatmap image for @_beatmapSet?.Title"/>
         <p>@_user1.Username has a score of @_score1.Score.Score</p>
     }
     else

@@ -14,6 +14,12 @@ public class BeatmapService(IApiService apiService) : IBeatmapService
         return await ApiService.GetAsync<BeatmapSetModel>(requestParams);
     }
 
+    public async Task<BeatmapModel?> GetMapFromId(int beatmapId)
+    {
+        var requestParams = $"beatmaps/{beatmapId}";
+        return await ApiService.GetAsync<BeatmapModel>(requestParams);
+    }
+
     public async Task<IEnumerable<BeatmapSetModel>?> SearchForSets(string searchInput)
     {
         const string requestParams = "beatmapsets/search";

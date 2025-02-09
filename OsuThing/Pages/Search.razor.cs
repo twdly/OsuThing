@@ -9,6 +9,10 @@ public partial class Search
 {
     [Inject] private IBeatmapService BeatmapService { get; set; } = null!;
 
+    [Parameter] public bool IsChildComponent { get; set; }
+    [Parameter] public EventCallback<bool> CloseSearchCallback { get; set; }
+    [Parameter] public EventCallback<int> SelectDiffCallback { get; set; }
+    
     private string SearchInput { get; set; } = "";
     private IEnumerable<BeatmapSetModel>? BeatmapSets { get; set; }
 
@@ -18,7 +22,6 @@ public partial class Search
         StateHasChanged();
     }
 
-    [Parameter] public bool IsChildComponent { get; set; }
 
     private void ClickSearchButton(KeyboardEventArgs args)
     {
@@ -26,5 +29,15 @@ public partial class Search
         {
             SearchForSets();
         }
+    }
+
+    private async void CloseSearch()
+    {
+        await CloseSearchCallback.InvokeAsync(false);
+    }
+    
+    private async void SelectDiff(int diffId)
+    {
+        await SelectDiffCallback.InvokeAsync(diffId);
     }
 }

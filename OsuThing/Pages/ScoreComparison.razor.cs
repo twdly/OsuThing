@@ -20,8 +20,9 @@ public partial class ScoreComparison
     private UserScoreModel? _score1;
     private UserScoreModel? _score2;
     private BeatmapSetModel? _beatmapSet;
-    private int? _mapId;
+    private BeatmapModel? _beatmap;
     private bool _getScoreButtonClicked;
+    private bool _searchButtonClicked;
     
     private async void FindUser(string? input, int userNo)
     {
@@ -41,18 +42,35 @@ public partial class ScoreComparison
         StateHasChanged();
     }
     
-    private async void FindMapAndScores()
+    private async void FindScores()
     {
         _getScoreButtonClicked = true;
-        if (_mapId != null)
-        {
-            _score1 = await ScoreService.GetBeatmapScore((int)_mapId, _user1!.Id);
-            _score2 = await ScoreService.GetBeatmapScore((int)_mapId, _user2!.Id);
-            if (_score1 != null)
-            {
-                _beatmapSet = await BeatmapService.GetSetFromId(_score1.Score.Beatmap.SetId);
-            }
-        }
+        _score1 = await ScoreService.GetBeatmapScore(_beatmap!.DiffId, _user1!.Id);
+        _score2 = await ScoreService.GetBeatmapScore(_beatmap!.DiffId, _user2!.Id);
         StateHasChanged();
+    }
+
+    private void SearchButtonClicked()
+    {
+        _searchButtonClicked = true;
+        StateHasChanged();
+    }
+
+    private Task SearchClosed(bool value)
+    {
+        _searchButtonClicked = value;
+        return Task.CompletedTask;
+    }
+
+    private async Task GetMap(int id)
+    {
+        _beatmap = await BeatmapService.GetMapFromId(id);
+        _beatmapSet = await BeatmapService.GetSetFromId(_beatmap!.SetId);
+        _searchButtonClicked = false;
+    }
+
+    private bool IsGetButtonDisabled()
+    {
+        return !(_beatmap != null && _user1 != null && _user2 != null);
     }
 }
