@@ -20,13 +20,12 @@ public partial class ScoreComparison
     private UserScoreModel? _score1;
     private UserScoreModel? _score2;
     private BeatmapSetModel? _beatmapSet;
-    private AuthenticationModel? _authentication;
     private int? _mapId;
     private bool _getScoreButtonClicked;
     
     private async void FindUser(string? input, int userNo)
     {
-        if (_authentication != null && input != null)
+        if (input != null)
         {
             var foundUser = await UserService.FindUser(input);
             switch (userNo)
@@ -55,10 +54,5 @@ public partial class ScoreComparison
             }
         }
         StateHasChanged();
-    }
-    
-    protected override async Task OnInitializedAsync()
-    {
-        _authentication = await AuthenticationService.Authenticate();
     }
 }
