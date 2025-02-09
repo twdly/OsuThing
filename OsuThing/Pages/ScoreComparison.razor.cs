@@ -12,8 +12,6 @@ public partial class ScoreComparison
     [Inject] private IUserService UserService { get; set; } = null!;
     
     [Inject] private IBeatmapService BeatmapService { get; set; } = null!;
-
-    [Inject] private IAuthenticationService AuthenticationService { get; set; } = null!;
     
     private UserModel? _user1;
     private UserModel? _user2;
