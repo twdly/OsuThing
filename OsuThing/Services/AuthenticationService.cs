@@ -1,9 +1,10 @@
 using System.Text.Json;
 using OsuThing.Models;
+using OsuThing.Services.Interfaces;
 
 namespace OsuThing.Services;
 
-public class AuthenticationService(IHttpClientFactory clientFactory)
+public class AuthenticationService(IHttpClientFactory clientFactory) : IAuthenticationService
 {
     private IHttpClientFactory ClientFactory { get; } = clientFactory;
     

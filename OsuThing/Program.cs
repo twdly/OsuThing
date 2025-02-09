@@ -1,4 +1,5 @@
 using OsuThing.Services;
+using OsuThing.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,11 +8,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
 
-builder.Services.AddSingleton<AuthenticationService>();
-builder.Services.AddSingleton<ScoreService>();
-builder.Services.AddSingleton<UserService>();
-builder.Services.AddSingleton<BeatmapService>();
-builder.Services.AddSingleton<ApiService>();
+builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
+builder.Services.AddSingleton<IScoreService, ScoreService>();
+builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<IBeatmapService, BeatmapService>();
+builder.Services.AddSingleton<IApiService, ApiService>();
 
 var app = builder.Build();
 

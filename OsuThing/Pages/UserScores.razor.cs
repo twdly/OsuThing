@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Components;
 using OsuThing.Enums;
 using OsuThing.Models;
-using OsuThing.Services;
+using OsuThing.Services.Interfaces;
 
 namespace OsuThing.Pages;
 
 public partial class UserScores
 {
-    [Inject] private ScoreService ScoreService { get; set; } = null!;
-    [Inject] private UserService UserService { get; set; } = null!;
+    [Inject] private IScoreService ScoreService { get; set; } = null!;
+    [Inject] private IUserService UserService { get; set; } = null!;
     
     private IEnumerable<ScoreModel> _scores = [];
     private UserModel? _user;

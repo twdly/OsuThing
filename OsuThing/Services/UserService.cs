@@ -1,10 +1,11 @@
 using OsuThing.Models;
+using OsuThing.Services.Interfaces;
 
 namespace OsuThing.Services;
 
-public class UserService(ApiService apiService)
+public class UserService(IApiService apiService) : IUserService
 {
-    private ApiService ApiService { get; } = apiService;
+    private IApiService ApiService { get; } = apiService;
 
     public async Task<UserModel?> FindUser(string? userName)
     {

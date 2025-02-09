@@ -1,10 +1,11 @@
 using OsuThing.Models;
+using OsuThing.Services.Interfaces;
 
 namespace OsuThing.Services;
 
-public class BeatmapService(ApiService apiService)
+public class BeatmapService(IApiService apiService) : IBeatmapService
 {
-    private ApiService ApiService { get; } = apiService;
+    private IApiService ApiService { get; } = apiService;
 
     public async Task<BeatmapSetModel?> GetSetFromId(int beatmapId)
     {

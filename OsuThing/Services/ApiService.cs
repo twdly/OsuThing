@@ -2,13 +2,14 @@ using System.Collections.Specialized;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Web;
+using OsuThing.Services.Interfaces;
 
 namespace OsuThing.Services;
 
-public class ApiService(IHttpClientFactory clientFactory, AuthenticationService authenticationService)
+public class ApiService(IHttpClientFactory clientFactory, IAuthenticationService authenticationService) : IApiService
 {
     private IHttpClientFactory ClientFactory { get; } = clientFactory;
-    private AuthenticationService AuthenticationService { get; } = authenticationService;
+    private IAuthenticationService AuthenticationService { get; } = authenticationService;
     
     private const string Endpoint = "https://osu.ppy.sh/api/v2/";
     

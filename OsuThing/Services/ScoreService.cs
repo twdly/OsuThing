@@ -2,12 +2,13 @@ using System.Collections.Specialized;
 using System.Text.Json;
 using OsuThing.Enums;
 using OsuThing.Models;
+using OsuThing.Services.Interfaces;
 
 namespace OsuThing.Services;
 
-public class ScoreService(ApiService apiService)
+public class ScoreService(IApiService apiService) : IScoreService
 {
-    private ApiService ApiService { get; } = apiService;
+    private IApiService ApiService { get; } = apiService;
     
     public async Task<IEnumerable<ScoreModel>?> GetUserScores(string userName, UserScoreType type, int count)
     {
