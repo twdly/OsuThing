@@ -6,6 +6,9 @@ namespace OsuThing.Services;
 public class AuthenticationService(IHttpClientFactory clientFactory)
 {
     private IHttpClientFactory ClientFactory { get; } = clientFactory;
+    
+    private DateTime LastAuthTime { get; set; }
+    private AuthenticationModel? CurrentAuth { get; set; }
 
     private static readonly JsonSerializerOptions Options = new()
     {
@@ -15,6 +18,11 @@ public class AuthenticationService(IHttpClientFactory clientFactory)
     
     public async Task<AuthenticationModel?> Authenticate()
     {
+        if (CurrentAuth != null && AuthStillValid())
+        {
+            return CurrentAuth;
+        }
+        
         // First line is client_id, second line is client_secret
         var apiKeys = await File.ReadAllLinesAsync("apikey");
         var values = new Dictionary<string, string>
@@ -31,6 +39,15 @@ public class AuthenticationService(IHttpClientFactory clientFactory)
         var response = await client.PostAsync("https://osu.ppy.sh/oauth/token", content);
         var jsonModel = await response.Content.ReadAsStringAsync();
         
-        return JsonSerializer.Deserialize<AuthenticationModel>(jsonModel, Options);
+        CurrentAuth = JsonSerializer.Deserialize<AuthenticationModel>(jsonModel, Options);
+        LastAuthTime = DateTime.Now;
+
+        return CurrentAuth;
+    }
+
+    private bool AuthStillValid()
+    {
+        var secondsSinceLastAuth = DateTime.Now.Subtract(LastAuthTime).Seconds;
+        return secondsSinceLastAuth < CurrentAuth!.ExpiresIn;
     }
 }
