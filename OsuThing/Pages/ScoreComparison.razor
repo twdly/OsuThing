@@ -28,18 +28,20 @@
 </div>
 @if (_searchButtonClicked)
 {
-    <Search IsChildComponent="true" CloseSearchCallback="@SearchClosed" SelectDiffCallback="GetMap"/>
+    <div class="search-container">
+        <Search IsChildComponent="true" CloseSearchCallback="@SearchClosed" SelectDiffCallback="GetMap"/>
+    </div>
 }
 else
 {
     <button @onclick="SearchButtonClicked">Search for beatmap</button>
+    <button disabled="@IsGetButtonDisabled()" @onclick="FindScores">Get scores</button>
 }
 @if (_beatmapSet != null)
 {
-    <p>Selected map: @_beatmapSet.Title - @_beatmap.DiffName</p>
+    <p>Selected map: @_beatmapSet.Title - @_beatmap!.DiffName</p>
 }
 
-<button disabled="@IsGetButtonDisabled()" @onclick="FindScores">Get scores</button>
 
 <div class="score-display">
 @if (_getScoreButtonClicked)
