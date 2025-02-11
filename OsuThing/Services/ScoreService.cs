@@ -30,7 +30,7 @@ public class ScoreService(IApiService apiService) : IScoreService
         };
         try
         {
-            return await ApiService.GetAsync<UserScoreModel>(requestParams, query);
+            return await ApiService.GetAsync<UserScoreModel>(requestParams, query) ?? new UserScoreModel();
         }
         catch (JsonException e)
         {

@@ -4,15 +4,14 @@ namespace OsuThing.Models;
 
 public class ScoreModel
 {
-
-    [JsonPropertyName("accuracy")] public required double Accuracy { get; set; }
-    [JsonPropertyName("pp")] public double? Pp { get; set; }
-    [JsonPropertyName("max_combo")] public required int MaxCombo { get; set; }
-    [JsonPropertyName("beatmap")] public required BeatmapModel Beatmap { get; set; }
+    [JsonPropertyName("accuracy")] public double Accuracy { get; init; } = -1;
+    [JsonPropertyName("pp")] public double? Pp { get; set; } = -1;
+    [JsonPropertyName("max_combo")] public int MaxCombo { get; init; } = -1;
+    [JsonPropertyName("beatmap")] public BeatmapModel Beatmap { get; set; }
     [JsonPropertyName("beatmapset")] public BeatmapSetModel? BeatmapSet { get; set; }
-    [JsonPropertyName("mods")] public required List<string> Mods { get; set; }
-    [JsonPropertyName("score")] public required int Score { get; set; }
-
+    [JsonPropertyName("mods")] public List<string> Mods { get; init; } = [];
+    [JsonPropertyName("score")] public int Score { get; set; } = 0;
+    
     public double GetRoundedAccuracy()
     {
         return Math.Round(Accuracy * 100, 2);

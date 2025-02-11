@@ -44,24 +44,8 @@ else
 
 
 <div class="score-display">
-@if (_getScoreButtonClicked)
+@if (_getScoreButtonClicked && _score1 is not null && _score2 is not null)
 {    
-    <img src="@_beatmapSet?.Covers.Cover" alt="Beatmap image for @_beatmapSet?.Title"/>
-    @if (_score1 != null && _user1 != null)
-    {
-        <p>@_user1.Username has a score of @_score1.Score.Score</p>
-    }
-    else
-    {
-        <p>@_user1!.Username has not set a score on this map.</p>
-    }
-    @if (_score2 != null && _user2 != null)
-    {
-        <p>@_user2.Username has a score of @_score2.Score.Score</p>
-    }
-    else
-    {
-        <p>@_user2!.Username has not set a score on this map.</p>
-    }
+    <ComparisonPanel User1="_user1" User2="_user2" UserScore1="_score1.Score" UserScore2="_score2.Score" BeatmapSet="_beatmapSet"/>
 }
 </div>
