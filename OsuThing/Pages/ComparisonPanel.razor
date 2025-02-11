@@ -1,6 +1,7 @@
-<div class="comparison-container">
+<div class="comparison-container" style="display: flex">
     <img src="@BeatmapSet.Covers.Cover" alt="Beatmap image for @BeatmapSet.Title"/>
-    
-    <ScoreComparisonDisplay User="User1" Score="UserScore1" ComparisonScore="UserScore2"/>
-    <ScoreComparisonDisplay User="User2" Score="UserScore2" ComparisonScore="UserScore1"/>
+    <div class="scores" style="display: inline-flex">
+        <ScoreComparisonDisplay User="User1" Score="UserScore1" ComparisonScore="UserScore2"/>
+        <ScoreComparisonDisplay User="User2" Score="UserScore2" ComparisonScore="UserScore1"/>
+    </div>
 </div>

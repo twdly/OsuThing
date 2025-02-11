@@ -1,8 +1,13 @@
-@if (Score.Score != 0)
-{
-    <p>@User.Username has a score of @Score.Score</p>
-}
-else
-{
+<div class="user-score">
+    @if (Score.Score != 0)
+    {
+    <h4>@User.Username</h4>
+    <p class="@(GetComparisonClass(Score.Score, ComparisonScore.Score, true))">Score: @Score.Score</p>
+    <p class="@(GetComparisonClass(Score.Accuracy, ComparisonScore.Accuracy, true))">Accuracy: @Math.Round(Score.Accuracy * 100, 2)%</p>
+    <p class="@(GetComparisonClass(Score.Pp, ComparisonScore.Pp, true))">PP: @Score.Pp</p>
+    }
+    else
+    {
     <p>@User.Username has not set a score on this map.</p>
-}
+    } 
+</div>

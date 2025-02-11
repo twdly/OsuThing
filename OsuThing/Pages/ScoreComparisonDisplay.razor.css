@@ -1,0 +1,12 @@
+.better {
+    color: lawngreen;
+}
+
+.worse {
+    color: firebrick;
+}
+
+.user-score {
+    flex-direction: column;
+    flex-grow: 1;
+}
