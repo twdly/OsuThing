@@ -15,6 +15,8 @@ public partial class ScoreComparison
     
     private UserModel? _user1;
     private UserModel? _user2;
+    private string _nameInput1 = "";
+    private string _nameInput2 = "";
     private UserScoreModel? _score1;
     private UserScoreModel? _score2;
     private BeatmapSetModel? _beatmapSet;
@@ -60,7 +62,7 @@ public partial class ScoreComparison
         return Task.CompletedTask;
     }
 
-    private async Task GetMap(int id)
+    private async Task GetMapFromSearch(int id)
     {
         _beatmap = await BeatmapService.GetMapFromId(id);
         _beatmapSet = await BeatmapService.GetSetFromId(_beatmap!.SetId);
@@ -70,5 +72,10 @@ public partial class ScoreComparison
     private bool IsGetButtonDisabled()
     {
         return !(_beatmap != null && _user1 != null && _user2 != null);
+    }
+
+    private void HandleComparisonClosed()
+    {
+        _getScoreButtonClicked = false;
     }
 }
