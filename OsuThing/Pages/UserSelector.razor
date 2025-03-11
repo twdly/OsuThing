@@ -1,0 +1,4 @@
+@using OsuThing.Services.Interfaces
+@inject IUserService UserService
+
+<input type="text" @bind="_userInput" @bind:event="oninput" @onkeyup="DebounceFindUser"/>
