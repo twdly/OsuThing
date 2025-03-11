@@ -9,6 +9,9 @@ public partial class UserSelector : IDisposable
 {
     [Parameter]
     public EventCallback<UserModel> HandleUserFound { get; set; }
+    
+    [Parameter]
+    public string? Label { get; set; }
 
     private Timer _debounceTimer = default!;
     private string? _userInput = "";
