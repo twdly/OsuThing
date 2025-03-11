@@ -5,7 +5,7 @@
 <h2>User Scores</h2>
 
 <div class="user-input">
-    <input type="text" @oninput="args => FindUser(args.Value?.ToString())"/>
+    <input type="text" @bind="_userInput" @bind:event="oninput" @onkeyup="DebounceFindUser"/>
     @if (_user is {Username: not null })
     {
         <p>Current user:</p>
