@@ -12,6 +12,9 @@ public partial class UserSelector : IDisposable
     
     [Parameter]
     public string? Label { get; set; }
+    
+    [Parameter]
+    public string? InitialValue { get; set; }
 
     private Timer _debounceTimer = default!;
     private string? _userInput = "";
@@ -28,11 +31,15 @@ public partial class UserSelector : IDisposable
         _debounceTimer.Start();
     }
     
-    protected override void OnInitialized()
+    protected override Task OnInitializedAsync()
     {
+        _userInput = InitialValue;
+        
         _debounceTimer = new Timer(500);
         _debounceTimer.Elapsed += FindUser;
         _debounceTimer.AutoReset = false;
+
+        return base.OnInitializedAsync();
     }
 
     public void Dispose()
