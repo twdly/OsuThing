@@ -23,13 +23,14 @@ public class AuthenticationService(IHttpClientFactory clientFactory) : IAuthenti
         {
             return CurrentAuth;
         }
+
+        var apiKeys = await GetApiKeys();
         
         // First line is client_id, second line is client_secret
-        var apiKeys = await File.ReadAllLinesAsync("apikey");
         var values = new Dictionary<string, string>
         {
-            { "client_id", apiKeys[0] },
-            {"client_secret", apiKeys[1]},
+            { "client_id", apiKeys.Item1 },
+            {"client_secret", apiKeys.Item2 },
             {"grant_type", "client_credentials"},
             {"scope", "public"}
         };
@@ -44,6 +45,17 @@ public class AuthenticationService(IHttpClientFactory clientFactory) : IAuthenti
         LastAuthTime = DateTime.Now;
 
         return CurrentAuth;
+    }
+
+    private static async Task<(string, string)> GetApiKeys()
+    {
+        var clientId = Environment.GetEnvironmentVariable("ClientId");
+        var clientSecret = Environment.GetEnvironmentVariable("ClientSecret");
+
+        if (clientId != null && clientSecret != null) return (clientId, clientSecret);
+        
+        var apiKeys = await File.ReadAllLinesAsync("apikey");
+        return (apiKeys[0], apiKeys[1]);
     }
 
     private bool AuthStillValid()
