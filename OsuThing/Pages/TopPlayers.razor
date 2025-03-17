@@ -1,0 +1,8 @@
+@page "/top-players"
+
+<h2>Top Players</h2>
+
+@foreach(var user in Users)
+{
+    <p>@user.User.Username</p>
+}

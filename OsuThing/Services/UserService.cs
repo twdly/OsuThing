@@ -12,4 +12,10 @@ public class UserService(IApiService apiService) : IUserService
         var requestParams = $"users/{userName}/osu";
         return await ApiService.GetAsync<UserModel>(requestParams);
     }
+
+    public async Task<PerformanceModel> GetTopPlayers()
+    {
+        var requestParams = "rankings/osu/performance";
+        return await ApiService.GetAsync<PerformanceModel>(requestParams) ?? new PerformanceModel();
+    }
 }
