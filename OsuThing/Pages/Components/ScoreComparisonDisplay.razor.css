@@ -1,9 +1,9 @@
 .better {
-    color: lawngreen;
+    color: oklch(65% 0.25 145);
 }
 
 .worse {
-    color: firebrick;
+    color: oklch(65% 0.25 25);
 }
 
 .user-score {
