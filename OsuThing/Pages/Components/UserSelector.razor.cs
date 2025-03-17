@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using OsuThing.Models;
 using Timer = System.Timers.Timer;
 
-namespace OsuThing.Pages;
+namespace OsuThing.Pages.Components;
 
 public partial class UserSelector : IDisposable
 {

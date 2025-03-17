@@ -1,8 +1,9 @@
 @page "/top-players"
+@using OsuThing.Pages.Components
 
 <h2>Top Players</h2>
 
 @foreach(var user in Users)
 {
-    <p>@user.User.Username</p>
+    <UserDisplay User="user"/>
 }
