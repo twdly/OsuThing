@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using OsuThing.Models;
 
-namespace OsuThing.Pages;
+namespace OsuThing.Pages.Components;
 
 public partial class ScoreComparisonDisplay : ComponentBase
 {
