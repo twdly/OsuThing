@@ -35,7 +35,7 @@ else
     else
     {
         <div class="user-input">
-            <input type="text" placeholder="User one:" @bind="_nameInput1" @oninput="args => FindUser(args.Value?.ToString(), 1)"/>
+            <UserSelector HandleUserFound="HandleUserOneSelected" Label="User one:" InitialValue="@_user1?.Username"/>
             @if (_user1 is {Username: not null })
             {
                 <p>Current user:</p>
@@ -46,7 +46,7 @@ else
             }
         </div>
         <div class="user-input">
-            <input type="text" placeholder="User two:" @bind="_nameInput2" @oninput="args => FindUser(args.Value?.ToString(), 2)"/>
+            <UserSelector HandleUserFound="HandleUserTwoSelected" Label="User Two:" InitialValue="@_user2?.Username"/>
             @if (_user2 is {Username: not null})
             {
                 <p>Current user:</p>

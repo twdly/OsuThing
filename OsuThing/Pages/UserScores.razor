@@ -5,8 +5,8 @@
 <h2>User Scores</h2>
 
 <div class="user-input">
-    <input type="text" @bind="_userInput" @bind:event="oninput" @onkeyup="DebounceFindUser"/>
-    @if (_user is {Username: not null })
+    <UserSelector HandleUserFound="HandleUserSelected" />
+    @if (_user is { Username: not null })
     {
         <p>Current user:</p>
         <a href="https://osu.ppy.sh/users/@_user.Id">
