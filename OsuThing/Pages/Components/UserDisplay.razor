@@ -1,2 +1,10 @@
-<img src="@User.User.Avatar" alt="@User.User.Username's avatar"/>
-<p>#@User.Rank - @User.User.Username</p>
+<div class="user-display">
+    <a href="https://osu.ppy.sh/users/@User.User.Id" title="View @User.User.Username's profile">
+        <img src="@User.User.Avatar" alt="@User.User.Username's avatar"/>
+    </a>
+    
+    <div class="user-info">
+        <p>#@User.Rank - @User.User.Username</p>
+        <a href="userScores?user=@User.User.Username">View scores</a>
+    </div>
+</div>
