@@ -6,7 +6,7 @@
 <h2>User Scores</h2>
 
 <div class="user-input">
-    <UserSelector HandleUserFound="HandleUserSelected" />
+    <UserSelector HandleUserFound="HandleUserSelected" InitialValue="@(User ?? "")"/>
     @if (_user is { Username: not null })
     {
         <p>Current user:</p>

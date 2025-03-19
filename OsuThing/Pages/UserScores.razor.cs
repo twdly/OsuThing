@@ -16,6 +16,9 @@ public partial class UserScores
     private UserScoreType _scoreType = UserScoreType.Best; // Default type is best as most players care primarily about the PP value of their score
     private int? _scoreCount = 100;
 
+    [SupplyParameterFromQuery] private string? User { get; set; }
+    private bool SearchImmediately { get; set; }
+
     private async void GetScores()
     {
         if (_scoreCount != null && _user != null)
@@ -42,6 +45,10 @@ public partial class UserScores
     private void HandleUserSelected(UserModel userModel)
     {
         _user = userModel;
+
+        if (!SearchImmediately) return;
+        SearchImmediately = false;
+        GetScores();
     }
 
     private static string CapitaliseString(string stringToCapitalise)
@@ -49,5 +56,15 @@ public partial class UserScores
         var capital = stringToCapitalise[0];
         var remaining = stringToCapitalise[1..];
         return char.ToUpper(capital) + remaining;
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        if (User != string.Empty)
+        {
+            SearchImmediately = true;
+        }
+
+        return base.OnInitializedAsync();
     }
 }

@@ -19,7 +19,12 @@ public partial class UserSelector : IDisposable
     private Timer _debounceTimer = default!;
     private string? _userInput = "";
     
-    private async void FindUser(object? sender, ElapsedEventArgs e)
+    private async void FindUserForTimer(object? sender, ElapsedEventArgs e)
+    {
+        await FindUser();
+    }
+
+    private async Task FindUser()
     {
         var user = await UserService.FindUser(_userInput);
         await InvokeAsync(() => HandleUserFound.InvokeAsync(user));
@@ -31,15 +36,18 @@ public partial class UserSelector : IDisposable
         _debounceTimer.Start();
     }
     
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         _userInput = InitialValue;
+
+        if (InitialValue != string.Empty)
+        {
+            await FindUser();
+        }
         
         _debounceTimer = new Timer(500);
-        _debounceTimer.Elapsed += FindUser;
+        _debounceTimer.Elapsed += FindUserForTimer;
         _debounceTimer.AutoReset = false;
-
-        return base.OnInitializedAsync();
     }
 
     public void Dispose()
