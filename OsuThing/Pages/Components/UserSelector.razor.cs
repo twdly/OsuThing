@@ -16,7 +16,7 @@ public partial class UserSelector : IDisposable
     [Parameter]
     public string? InitialValue { get; set; }
 
-    private Timer _debounceTimer = default!;
+    private Timer? _debounceTimer = null;
     private string? _userInput = "";
     
     private async void FindUserForTimer(object? sender, ElapsedEventArgs e)
@@ -32,8 +32,8 @@ public partial class UserSelector : IDisposable
 
     private void DebounceFindUser()
     {
-        _debounceTimer.Stop();
-        _debounceTimer.Start();
+        _debounceTimer?.Stop();
+        _debounceTimer?.Start();
     }
     
     protected override async Task OnInitializedAsync()
@@ -52,7 +52,7 @@ public partial class UserSelector : IDisposable
 
     public void Dispose()
     {
-        _debounceTimer.Dispose();
+        _debounceTimer?.Dispose();
         GC.SuppressFinalize(this);
     }
 }

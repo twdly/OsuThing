@@ -19,7 +19,7 @@ public partial class UserScores
     [SupplyParameterFromQuery] private string? User { get; set; }
     private bool SearchImmediately { get; set; }
 
-    private async void GetScores()
+    private async Task GetScores()
     {
         if (_scoreCount != null && _user != null)
         {
