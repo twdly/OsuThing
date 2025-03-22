@@ -30,5 +30,5 @@
 </div>
 @foreach (var score in _scores)
 {
-    <UserScore Score="score"/>
+    <UserScore Score="score" UserId="@_user!.Username"/>
 }

@@ -18,9 +18,13 @@
     {
         <p>Accuracy of @Score.GetRoundedAccuracy()% and max combo of @Score.MaxCombo for a PP value of @Score.Pp</p>
     }
+    <a href="comparison?beatmapId=@Score.Beatmap.DiffId&username=@Username">
+        <p>Compare</p>
+    </a>
 </div>
 
 @code
 {
     [Parameter] public ScoreModel? Score { get; set; }
+    [Parameter] public int Username { get; set; }
 }
