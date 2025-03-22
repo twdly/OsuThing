@@ -36,7 +36,7 @@ else
     else
     {
         <div class="user-input">
-            <UserSelector HandleUserFound="HandleUserOneSelected" Label="User one:" InitialValue="@_user1?.Username"/>
+            <UserSelector HandleUserFound="HandleUserOneSelected" Label="User one:" InitialValue="@_username1"/>
             @if (_user1 is {Username: not null })
             {
                 <p>Current user:</p>
@@ -47,7 +47,7 @@ else
             }
         </div>
         <div class="user-input">
-            <UserSelector HandleUserFound="HandleUserTwoSelected" Label="User Two:" InitialValue="@_user2?.Username"/>
+            <UserSelector HandleUserFound="HandleUserTwoSelected" Label="User Two:" InitialValue="@_username2"/>
             @if (_user2 is {Username: not null})
             {
                 <p>Current user:</p>

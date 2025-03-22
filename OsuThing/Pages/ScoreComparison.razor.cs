@@ -13,14 +13,19 @@ public partial class ScoreComparison
     
     private UserModel? _user1;
     private UserModel? _user2;
+    private string? _username1;
+    private string? _username2;
     private UserScoreModel? _score1;
     private UserScoreModel? _score2;
     private BeatmapSetModel? _beatmapSet;
     private BeatmapModel? _beatmap;
     private bool _getScoreButtonClicked;
     private bool _searchButtonClicked;
+    
+    [SupplyParameterFromQuery] private int? BeatmapId { get; set; }
+    [SupplyParameterFromQuery] private string? Username { get; set; }
 
-    private async void FindScores()
+    private async Task FindScores()
     {
         _getScoreButtonClicked = true;
         _score1 = await ScoreService.GetBeatmapScore(_beatmap!.DiffId, _user1!.Id);
@@ -60,10 +65,21 @@ public partial class ScoreComparison
     private void HandleUserOneSelected(UserModel userModel)
     {
         _user1 = userModel;
+        _username1 = _user1.Username;
     }
 
     private void HandleUserTwoSelected(UserModel userModel)
     {
         _user2 = userModel;
+        _username2 = _user2.Username;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (BeatmapId != null && Username != null)
+        {
+            _username1 = Username;
+            await GetMapFromSearch(BeatmapId ?? 0);
+        }
     }
 }
