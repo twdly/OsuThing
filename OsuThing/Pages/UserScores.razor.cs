@@ -42,13 +42,13 @@ public partial class UserScores
         _scoreType = type;
     }
 
-    private void HandleUserSelected(UserModel userModel)
+    private async Task HandleUserSelected(UserModel userModel)
     {
         _user = userModel;
 
         if (!SearchImmediately) return;
         SearchImmediately = false;
-        GetScores();
+        await GetScores();
     }
 
     private static string CapitaliseString(string stringToCapitalise)
@@ -60,7 +60,7 @@ public partial class UserScores
 
     protected override Task OnInitializedAsync()
     {
-        if (User != string.Empty)
+        if (User != null)
         {
             SearchImmediately = true;
         }
