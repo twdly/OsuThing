@@ -18,6 +18,8 @@ public partial class UserSelector : IDisposable
 
     private Timer? _debounceTimer = null;
     private string? _userInput = "";
+
+    private UserModel? _userModel;
     
     private async void FindUserForTimer(object? sender, ElapsedEventArgs e)
     {
@@ -26,8 +28,8 @@ public partial class UserSelector : IDisposable
 
     private async Task FindUser()
     {
-        var user = await UserService.FindUser(_userInput);
-        await InvokeAsync(() => HandleUserFound.InvokeAsync(user));
+        _userModel = await UserService.FindUser(_userInput);
+        await InvokeAsync(() => HandleUserFound.InvokeAsync(_userModel));
     }
 
     private void DebounceFindUser()

@@ -7,13 +7,6 @@
 
 <div class="user-input">
     <UserSelector HandleUserFound="HandleUserSelected" InitialValue="@(User ?? "")"/>
-    @if (_user is { Username: not null })
-    {
-        <a href="https://osu.ppy.sh/users/@_user.Id">
-            <h4>@_user.Username</h4>
-            <img src="@_user.Avatar" alt="Avatar for @_user.Username" class="avatar"/>
-        </a>
-    }
 </div>
 <div class="score-input">
     <p>Number of scores:</p>
