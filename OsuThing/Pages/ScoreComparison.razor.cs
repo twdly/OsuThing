@@ -76,9 +76,12 @@ public partial class ScoreComparison
 
     protected override async Task OnInitializedAsync()
     {
-        if (BeatmapId != null && Username != null)
+        if (Username != null)
         {
             _username1 = Username;
+        }
+        if (BeatmapId != null)
+        {
             await GetMapFromSearch(BeatmapId ?? 0);
         }
     }
