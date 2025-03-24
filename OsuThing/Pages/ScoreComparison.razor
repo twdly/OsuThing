@@ -39,7 +39,6 @@ else
             <UserSelector HandleUserFound="HandleUserOneSelected" Label="User one:" InitialValue="@_username1"/>
             @if (_user1 is {Username: not null })
             {
-                <p>Current user:</p>
                 <a href="https://osu.ppy.sh/users/@_user1.Id">
                     <h4>@_user1.Username</h4>
                     <img src="@_user1.Avatar" alt="Avatar for @_user1.Username" class="avatar"/>
@@ -50,7 +49,6 @@ else
             <UserSelector HandleUserFound="HandleUserTwoSelected" Label="User Two:" InitialValue="@_username2"/>
             @if (_user2 is {Username: not null})
             {
-                <p>Current user:</p>
                 <a href="https://osu.ppy.sh/users/@_user2.Id">
                     <h4>@_user2.Username</h4>
                     <img src="@_user2.Avatar" alt="Avatar for @_user2.Username" class="avatar"/>
