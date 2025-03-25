@@ -1,5 +1,4 @@
-.score-title {
-    width: 30rem;
+.set-title {
     aspect-ratio: 16/5;
     display: flex;
     border-top-left-radius: 1rem;
@@ -7,7 +6,7 @@
     border: 1px solid #9C9C9C;
 }
 
-.score-body {
+.set-body {
     border-top: none;
     border-left: 1px solid #9C9C9C;
     border-right: 1px solid #9C9C9C;
@@ -17,8 +16,8 @@
     padding-left: 0.5rem;
 }
 
-.score-container {
-    width: 30rem;
+.set-container {
+    width: min(30rem, 88vw);
     border-radius: 1rem;
     margin-top: 2rem;
 }

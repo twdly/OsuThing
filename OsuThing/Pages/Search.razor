@@ -20,10 +20,10 @@ else
 {
     @foreach (var beatmapSet in BeatmapSets)
     {
-        <div class="score-container">
-            <div style="background-image: url(@beatmapSet.Covers.Cover)" class="score-title image-tint">
+        <div class="set-container">
+            <div style="background-image: url(@beatmapSet.Covers.Cover)" class="set-title">
             </div>
-            <div class="score-body">
+            <div class="set-body">
                 <h4>@beatmapSet.Title</h4>
                 @foreach (var diff in beatmapSet.Difficulties!)
                 {
