@@ -20,21 +20,25 @@ else
 {
     @foreach (var beatmapSet in BeatmapSets)
     {
-        <div>
-            <h4>@beatmapSet.Title (@beatmapSet.Id)</h4>
-            @foreach (var diff in beatmapSet.Difficulties!)
-            {
-                @if (IsChildComponent)
+        <div class="score-container">
+            <div style="background-image: url(@beatmapSet.Covers.Cover)" class="score-title image-tint">
+            </div>
+            <div class="score-body">
+                <h4>@beatmapSet.Title</h4>
+                @foreach (var diff in beatmapSet.Difficulties!)
                 {
-                    <div @onclick="@(() => SelectDiff(diff.DiffId))">
-                        <a href="javascript:void(0);">@diff.DiffName - @diff.Difficulty*</a>
-                    </div>
+                    @if (IsChildComponent)
+                    {
+                        <div @onclick="@(() => SelectDiff(diff.DiffId))">
+                            <a href="javascript:void(0);">@diff.DiffName - @diff.Difficulty*</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>@diff.DiffName - @diff.Difficulty*</p>
+                    }
                 }
-                else
-                {
-                    <p>@diff.DiffName - @diff.Difficulty*</p>
-                }
-            }
+            </div>
         </div>
     }
 }

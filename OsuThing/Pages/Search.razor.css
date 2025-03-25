@@ -1,0 +1,28 @@
+.score-title {
+    width: 30rem;
+    aspect-ratio: 16/5;
+    display: flex;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border: 1px solid #9C9C9C;
+}
+
+.score-body {
+    border-top: none;
+    border-left: 1px solid #9C9C9C;
+    border-right: 1px solid #9C9C9C;
+    border-bottom: 1px solid #9C9C9C;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding-left: 0.5rem;
+}
+
+.score-container {
+    width: 30rem;
+    border-radius: 1rem;
+    margin-top: 2rem;
+}
+
+p {
+    margin-bottom: 0;
+}
