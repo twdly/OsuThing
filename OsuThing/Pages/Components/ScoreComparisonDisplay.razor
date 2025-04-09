@@ -1,18 +1,18 @@
 <div class="user-score">
     @if (Score.Score != 0)
     {
-    <h4>@User.Username</h4>
-    <p class="@(GetComparisonClass(Score.Score, ComparisonScore.Score, true))">Score: @Score.Score</p>
-    <p class="@(GetComparisonClass(Score.Accuracy, ComparisonScore.Accuracy, true))">Accuracy: @Math.Round(Score.Accuracy * 100, 2)%</p>
-    <p class="@(GetComparisonClass(Score.MaxCombo, ComparisonScore.MaxCombo, true))">Combo: @(Score.MaxCombo)x</p>
-    <p class="@(GetComparisonClass(Score.ScoreStats.ThreeHundreds, ComparisonScore.ScoreStats.ThreeHundreds, true))">300s: @(Score.ScoreStats.ThreeHundreds)</p>
-    <p class="@(GetComparisonClass(Score.ScoreStats.Hundreds, ComparisonScore.ScoreStats.Hundreds, false))">100s: @(Score.ScoreStats.Hundreds)</p>
-    <p class="@(GetComparisonClass(Score.ScoreStats.Fifties, ComparisonScore.ScoreStats.Fifties, false))">50s: @(Score.ScoreStats.Fifties)</p>
-    <p class="@(GetComparisonClass(Score.ScoreStats.Misses, ComparisonScore.ScoreStats.Misses, false))">Misses: @(Score.ScoreStats.Misses)</p>
-    <p class="@(GetComparisonClass(Score.Pp, ComparisonScore.Pp, true))">PP: @Score.Pp</p>
+        <h4>@User.Username</h4>
+        <p class="@(GetComparisonClass(Score.Score, ComparisonScore.Score, true))">Score: @Score.Score</p>
+        <p class="@(GetComparisonClass(Score.Accuracy, ComparisonScore.Accuracy, true))">Accuracy: @Math.Round(Score.Accuracy * 100, 2)%</p>
+        <p class="@(GetComparisonClass(Score.MaxCombo, ComparisonScore.MaxCombo, true))">Combo: @(Score.MaxCombo)x</p>
+        <p class="@(GetComparisonClass(Score.ScoreStats.ThreeHundreds, ComparisonScore.ScoreStats.ThreeHundreds, true))">300s: @(Score.ScoreStats.ThreeHundreds)</p>
+        <p class="@(GetComparisonClass(Score.ScoreStats.Hundreds, ComparisonScore.ScoreStats.Hundreds, false))">100s: @(Score.ScoreStats.Hundreds)</p>
+        <p class="@(GetComparisonClass(Score.ScoreStats.Fifties, ComparisonScore.ScoreStats.Fifties, false))">50s: @(Score.ScoreStats.Fifties)</p>
+        <p class="@(GetComparisonClass(Score.ScoreStats.Misses, ComparisonScore.ScoreStats.Misses, false))">Misses: @(Score.ScoreStats.Misses)</p>
+        <p class="@(GetComparisonClass(Score.Pp, ComparisonScore.Pp, true))">PP: @Score.Pp</p>
     }
     else
     {
-    <p>@User.Username has not set a score on this map.</p>
-    } 
+        <p>@User.Username has not set a score on this map.</p>
+    }
 </div>
