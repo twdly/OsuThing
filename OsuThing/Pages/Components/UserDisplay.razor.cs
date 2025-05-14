@@ -5,5 +5,5 @@ namespace OsuThing.Pages.Components;
 
 public partial class UserDisplay : ComponentBase
 {
-    [Parameter] public UserExtendedModel User { get; set; }
+    [Parameter] public required UserExtendedModel User { get; set; }
 }

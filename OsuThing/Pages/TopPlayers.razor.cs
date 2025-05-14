@@ -7,7 +7,7 @@ namespace OsuThing.Pages;
 public partial class TopPlayers
 {
     [Inject]
-    public IUserService UserService { get; set; }
+    public required IUserService UserService { get; set; }
 
     private IEnumerable<UserExtendedModel> Users { get; set; } = [];
     

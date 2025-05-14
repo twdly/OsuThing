@@ -4,8 +4,8 @@ namespace OsuThing.Models;
 
 public class BeatmapSetModel
 {
-    [JsonPropertyName("title")] public required string Title { get; set; }
-    [JsonPropertyName("covers")] public required CoverModel Covers { get; set; }
-    [JsonPropertyName("id")] public required int Id { get; set; }
-    [JsonPropertyName("beatmaps")] public IEnumerable<BeatmapModel>? Difficulties { get; set; }
+    [JsonPropertyName("title")] public string Title { get; set; } = "";
+    [JsonPropertyName("covers")] public CoverModel Covers { get; set; } = new();
+    [JsonPropertyName("id")] public int Id { get; set; } = 0;
+    [JsonPropertyName("beatmaps")] public IEnumerable<BeatmapModel> Difficulties { get; set; } = [];
 }

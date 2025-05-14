@@ -4,5 +4,5 @@ namespace OsuThing.Models;
 
 public class CoverModel
 {
-    [JsonPropertyName("cover")] public required string Cover { get; set; }
+    [JsonPropertyName("cover")] public string Cover { get; set; } = "";
 }
