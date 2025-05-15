@@ -46,6 +46,7 @@ else
     }
     @if (_beatmapSet != null)
     {
+        <img src="@_beatmapSet.Covers.Cover" alt="Beatmap art for @_beatmapSet.Title"/>
         <p>Selected map: @_beatmapSet.Title - @_beatmap!.DiffName</p>
     }
 }
