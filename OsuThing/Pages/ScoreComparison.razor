@@ -35,11 +35,13 @@ else
     }
     else
     {
-        <div class="user-input">
-            <UserSelector HandleUserFound="HandleUserOneSelected" Label="User one:" InitialValue="@_username1"/>
-        </div>
-        <div class="user-input">
-            <UserSelector HandleUserFound="HandleUserTwoSelected" Label="User Two:" InitialValue="@_username2"/>
+        <div class="user-input-container">
+            <div class="user-input">
+                <UserSelector HandleUserFound="HandleUserOneSelected" Label="User one:" InitialValue="@_username1"/>
+            </div>
+            <div class="user-input">
+                <UserSelector HandleUserFound="HandleUserTwoSelected" Label="User Two:" InitialValue="@_username2"/>
+            </div>
         </div>
         <button @onclick="SearchButtonClicked">Search for beatmap</button>
         <button disabled="@IsGetButtonDisabled()" @onclick="FindScores">Get scores</button>
