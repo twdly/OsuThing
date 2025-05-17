@@ -45,11 +45,11 @@ else
         </div>
         <button @onclick="SearchButtonClicked">Search for beatmap</button>
         <button disabled="@IsGetButtonDisabled()" @onclick="FindScores">Get scores</button>
-    }
-    @if (_beatmapSet != null)
-    {
-        <img src="@_beatmapSet.Covers.Cover" alt="Beatmap art for @_beatmapSet.Title"/>
-        <p>Selected map: @_beatmapSet.Title - @_beatmap!.DiffName</p>
+        @if (_beatmapSet != null)
+        {
+            <img src="@_beatmapSet.Covers.Cover" alt="Beatmap art for @_beatmapSet.Title"/>
+            <p>Selected map: @_beatmapSet.Title - @_beatmap!.DiffName</p>
+        }
     }
 }
 
