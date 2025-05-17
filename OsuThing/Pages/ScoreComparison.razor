@@ -42,14 +42,21 @@ else
             <div class="user-input">
                 <UserSelector HandleUserFound="HandleUserTwoSelected" Label="User Two:" InitialValue="@_username2"/>
             </div>
+            <div class="user-input">
+                <button @onclick="SearchButtonClicked">Search for beatmap</button>
+                @if (_beatmapSet != null)
+                {
+                    <div class="selected-map">
+                        <a href="https://osu.ppy.sh/beatmapsets/@_beatmapSet.Id">
+                            <h4>@_beatmapSet.Title - @_beatmap!.DiffName</h4>
+                            <img src="@_beatmapSet.Covers.Card" alt="Beatmap art for @_beatmapSet.Title"/>
+                        </a>
+
+                    </div>
+                }
+            </div>
         </div>
-        <button @onclick="SearchButtonClicked">Search for beatmap</button>
         <button disabled="@IsGetButtonDisabled()" @onclick="FindScores">Get scores</button>
-        @if (_beatmapSet != null)
-        {
-            <img src="@_beatmapSet.Covers.Cover" alt="Beatmap art for @_beatmapSet.Title"/>
-            <p>Selected map: @_beatmapSet.Title - @_beatmap!.DiffName</p>
-        }
     }
 }
 
