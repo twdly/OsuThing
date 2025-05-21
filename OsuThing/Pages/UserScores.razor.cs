@@ -21,6 +21,7 @@ public partial class UserScores
 
     private async Task GetScores()
     {
+        LimitScoreCount();
         if (_scoreCount != null && _user != null)
         {
             _scores = await ScoreService.GetUserScores(_user.Id.ToString(), _scoreType, _scoreCount.Value) ?? [];
@@ -40,6 +41,16 @@ public partial class UserScores
     private void SetScoreType(UserScoreType type)
     {
         _scoreType = type;
+    }
+
+    private void LimitScoreCount()
+    {
+        _scoreCount = _scoreCount switch
+        {
+            > 100 => 100,
+            < 1 => 1,
+            _ => _scoreCount
+        };
     }
 
     private async Task HandleUserSelected(UserModel userModel)

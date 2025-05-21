@@ -10,7 +10,7 @@
 </div>
 <div class="score-input">
     <p>Number of scores:</p>
-    <input type="text" @bind-value="_scoreCount" @bind-value:event="oninput"/>
+    <input type="text" @bind-value="_scoreCount" @bind-value:event="oninput" @onblur="LimitScoreCount"/>
     <button @onclick="GetScores" disabled="@IsScoreButtonDisabled()">Get scores</button>
     <ul class="button-group">
         <button @onclick="() => SetScoreType(UserScoreType.Best)">Best</button>
