@@ -22,6 +22,10 @@
     margin-top: 2rem;
 }
 
+.set-container:last-of-type {
+    padding-bottom: 1rem;
+}
+
 p {
     margin-bottom: 0;
 }
