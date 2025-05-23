@@ -13,7 +13,7 @@ else
 }
 
 
-<input type="text" @bind="SearchInput" @onkeyup="ClickSearchButton"/>
+<input type="text" @bind="SearchInput" @onkeyup="ClickSearchButton" placeholder="Beatmap name:"/>
 <button @onclick="SearchForSets">Search</button>
 
 @if (BeatmapSets != null && BeatmapSets.Count() != 0)
