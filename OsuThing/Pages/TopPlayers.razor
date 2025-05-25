@@ -3,6 +3,11 @@
 
 <h2>Top Players</h2>
 
+@if (!Users.Any())
+{
+    <p>Loading...</p>    
+}
+
 @foreach(var user in Users)
 {
     <UserDisplay User="user"/>
