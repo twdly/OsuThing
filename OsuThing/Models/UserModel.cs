@@ -7,4 +7,5 @@ public class UserModel
     [JsonPropertyName("username")] public string? Username { get; set; }
     [JsonPropertyName("id")] public int Id { get; set; }
     [JsonPropertyName("avatar_url")] public string? Avatar { get; set; }
+    [JsonPropertyName("statistics")] public UserStatisticsModel? Stats { get; set; }
 }
