@@ -10,10 +10,22 @@ public partial class TopPlayers
     public required IUserService UserService { get; set; }
 
     private IEnumerable<UserExtendedModel> Users { get; set; } = [];
+    private string Mode { get; set; } = "osu";
+
+    private async Task SetMode(string mode)
+    {
+        Mode = mode;
+        await GetPlayers();
+    }
+
+    private async Task GetPlayers()
+    {
+        var result = await UserService.GetTopPlayers(Mode);
+        Users = result.Users;
+    }
     
     protected override async Task OnInitializedAsync()
     {
-        var result = await UserService.GetTopPlayers();
-        Users = result.Users;
+        await GetPlayers();
     }
 }

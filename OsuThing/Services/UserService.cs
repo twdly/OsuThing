@@ -13,9 +13,9 @@ public class UserService(IApiService apiService) : IUserService
         return await ApiService.GetAsync<UserModel>(requestParams);
     }
 
-    public async Task<PerformanceModel> GetTopPlayers()
+    public async Task<PerformanceModel> GetTopPlayers(string mode)
     {
-        const string requestParams = "rankings/osu/performance";
+        var requestParams = $"rankings/{mode}/performance";
         return await ApiService.GetAsync<PerformanceModel>(requestParams) ?? new PerformanceModel();
     }
 }
