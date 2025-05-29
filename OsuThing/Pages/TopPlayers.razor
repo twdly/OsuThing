@@ -3,17 +3,17 @@
 
 <h2>Top Players</h2>
 
-@if (!Users.Any())
-{
-    <p>Loading...</p>    
-}
-
 <div class="mode-buttons">
     <button disabled="@(Mode == "osu")" @onclick="@(() => SetMode("osu"))">Standard</button>
     <button disabled="@(Mode == "mania")" @onclick="@(() => SetMode("mania"))">Mania</button>
     <button disabled="@(Mode == "taiko")" @onclick="@(() => SetMode("taiko"))">Taiko</button>
     <button disabled="@(Mode == "fruits")" @onclick="@(() => SetMode("fruits"))">CTB</button>
 </div>
+
+@if (!Users.Any())
+{
+    <p>Loading...</p>    
+}
 
 @foreach(var user in Users)
 {
