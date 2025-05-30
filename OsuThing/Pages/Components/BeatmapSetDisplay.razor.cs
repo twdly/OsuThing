@@ -8,8 +8,16 @@ public partial class BeatmapSetDisplay : ComponentBase
     [Parameter] public required BeatmapSetModel BeatmapSet { get; set; }
     [Parameter] public required bool IsChildComponent { get; set; }
     [Parameter] public required EventCallback<int> SelectDiffCallback { get; set; }
-     private IEnumerable<IGrouping<string, BeatmapModel>> Difficulties { get; set; } = []; 
+     private IEnumerable<IGrouping<string, BeatmapModel>> Difficulties { get; set; } = [];
 
+     private Dictionary<string, string> _displayNames = new()
+     {
+         ["osu"] = "Standard",
+         ["taiko"] = "Taiko",
+         ["mania"] = "Mania",
+         ["fruits"] = "Catch the Beat",
+     };
+     
      private async Task SelectDiff(int diffId)
      {
          await SelectDiffCallback.InvokeAsync(diffId);

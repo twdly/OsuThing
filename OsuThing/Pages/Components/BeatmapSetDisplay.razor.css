@@ -26,6 +26,10 @@
     padding-bottom: 1rem;
 }
 
+.mode-name {
+    color: grey;
+}
+
 p {
     margin-bottom: 0;
 }

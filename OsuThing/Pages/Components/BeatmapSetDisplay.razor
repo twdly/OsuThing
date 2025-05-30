@@ -3,18 +3,23 @@
     </div>
     <div class="set-body">
         <h4>@BeatmapSet.Title</h4>
-        @foreach (var diff in BeatmapSet.Difficulties!)
+        @foreach (var mode in Difficulties)
         {
-            @if (IsChildComponent)
+            <p class="mode-name">@_displayNames[@mode.Key]</p>
+            @foreach (var diff in mode.Select(x => x).ToList())
             {
-                <div @onclick="@(() => SelectDiff(diff.DiffId))">
-                    <a href="javascript:void(0);">@diff.DiffName - @diff.Difficulty*</a>
-                </div>
-            }
-            else
-            {
-                <p>@diff.DiffName - @diff.Difficulty*</p>
+                @if (IsChildComponent)
+                {
+                    <div @onclick="@(() => SelectDiff(diff.DiffId))">
+                        <a href="javascript:void(0);">@diff.DiffName - @diff.Difficulty*</a>
+                    </div>
+                }
+                else
+                {
+                    <p>@diff.DiffName - @diff.Difficulty*</p>
+                }
             }
         }
+
     </div>
 </div>
