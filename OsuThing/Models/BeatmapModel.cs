@@ -8,4 +8,5 @@ public class BeatmapModel
     [JsonPropertyName("id")] public required int DiffId { get; set; }
     [JsonPropertyName("difficulty_rating")] public required float Difficulty { get; set; }
     [JsonPropertyName("version")] public required string DiffName { get; set; }
+    [JsonPropertyName("mode")] public required string Mode { get; set; }
 }

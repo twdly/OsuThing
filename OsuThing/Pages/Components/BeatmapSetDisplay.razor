@@ -1,0 +1,20 @@
+<div class="set-container">
+    <div style="background-image: url(@BeatmapSet.Covers.Cover)" class="set-title">
+    </div>
+    <div class="set-body">
+        <h4>@BeatmapSet.Title</h4>
+        @foreach (var diff in BeatmapSet.Difficulties!)
+        {
+            @if (IsChildComponent)
+            {
+                <div @onclick="@(() => SelectDiff(diff.DiffId))">
+                    <a href="javascript:void(0);">@diff.DiffName - @diff.Difficulty*</a>
+                </div>
+            }
+            else
+            {
+                <p>@diff.DiffName - @diff.Difficulty*</p>
+            }
+        }
+    </div>
+</div>

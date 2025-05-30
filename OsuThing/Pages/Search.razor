@@ -1,4 +1,5 @@
 @page "/search"
+@using OsuThing.Pages.Components
 
 @if (!IsChildComponent)
 {
@@ -20,26 +21,7 @@ else
 {
     @foreach (var beatmapSet in BeatmapSets)
     {
-        <div class="set-container">
-            <div style="background-image: url(@beatmapSet.Covers.Cover)" class="set-title">
-            </div>
-            <div class="set-body">
-                <h4>@beatmapSet.Title</h4>
-                @foreach (var diff in beatmapSet.Difficulties!)
-                {
-                    @if (IsChildComponent)
-                    {
-                        <div @onclick="@(() => SelectDiff(diff.DiffId))">
-                            <a href="javascript:void(0);">@diff.DiffName - @diff.Difficulty*</a>
-                        </div>
-                    }
-                    else
-                    {
-                        <p>@diff.DiffName - @diff.Difficulty*</p>
-                    }
-                }
-            </div>
-        </div>
+        <BeatmapSetDisplay BeatmapSet="beatmapSet" SelectDiffCallback="SelectDiffCallback" IsChildComponent="IsChildComponent"/>
     }
 }
 else if (BeatmapSets != null && !BeatmapSets.Any())

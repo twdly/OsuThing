@@ -16,28 +16,23 @@ public partial class Search
     private string SearchInput { get; set; } = "";
     private IEnumerable<BeatmapSetModel>? BeatmapSets { get; set; }
 
-    private async void SearchForSets()
+    private async Task SearchForSets()
     {
         BeatmapSets = await BeatmapService.SearchForSets(SearchInput);
         StateHasChanged();
     }
 
 
-    private void ClickSearchButton(KeyboardEventArgs args)
+    private async Task ClickSearchButton(KeyboardEventArgs args)
     {
         if (args.Key == "Enter")
         {
-            SearchForSets();
+            await SearchForSets();
         }
     }
 
-    private async void CloseSearch()
+    private async Task CloseSearch()
     {
         await CloseSearchCallback.InvokeAsync(false);
-    }
-    
-    private async void SelectDiff(int diffId)
-    {
-        await SelectDiffCallback.InvokeAsync(diffId);
     }
 }
