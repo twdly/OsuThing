@@ -5,7 +5,7 @@
         <h4>@BeatmapSet.Title</h4>
         @foreach (var mode in Difficulties)
         {
-            <p class="mode-name">@_displayNames[@mode.Key]</p>
+            <p class="mode-name">@_displayNames[mode.Key]</p>
             @foreach (var diff in mode.Select(x => x).ToList())
             {
                 @if (IsChildComponent)
