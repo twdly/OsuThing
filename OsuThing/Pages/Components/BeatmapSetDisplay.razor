@@ -5,20 +5,22 @@
         <h4>@BeatmapSet.Title</h4>
         @foreach (var mode in Difficulties)
         {
-            <p class="mode-name">@_displayNames[mode.Key]</p>
-            @foreach (var diff in mode.Select(x => x).ToList())
-            {
-                @if (IsChildComponent)
+            <div class="mode-section">
+                <p class="mode-name">@_displayNames[mode.Key]</p>
+                @foreach (var diff in mode.Select(x => x).ToList())
                 {
-                    <div @onclick="@(() => SelectDiff(diff.DiffId))">
-                        <a href="javascript:void(0);">@diff.DiffName - @diff.Difficulty*</a>
-                    </div>
+                    @if (IsChildComponent)
+                    {
+                        <div @onclick="@(() => SelectDiff(diff.DiffId))">
+                            <a href="javascript:void(0);">@diff.DiffName - @diff.Difficulty*</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>@diff.DiffName - @diff.Difficulty*</p>
+                    }
                 }
-                else
-                {
-                    <p>@diff.DiffName - @diff.Difficulty*</p>
-                }
-            }
+            </div>
         }
     </div>
 </div>
