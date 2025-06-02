@@ -42,7 +42,7 @@ public partial class UserSelector : IDisposable
     {
         _userInput = InitialValue;
 
-        if (InitialValue != string.Empty)
+        if (InitialValue is not null)
         {
             await FindUser();
         }
