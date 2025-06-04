@@ -7,9 +7,9 @@
 
 <div class="user-input">
     <UserSelector HandleUserFound="HandleUserSelected" InitialValue="@(User ?? "")" Label="Username:"/>
-    @if (_user != null)
+    @if (_user is { Stats: not null })
     {
-        <p>PP: @_user.Stats?.Pp</p>
+        <p>PP: @_user.Stats.Pp</p>
     }
 </div>
 <div class="score-input">
