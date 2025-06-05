@@ -14,6 +14,7 @@ public partial class TopPlayers
 
     private async Task SetMode(string mode)
     {
+        Users = [];
         Mode = mode;
         await GetPlayers();
     }
