@@ -1,7 +1,7 @@
 @using OsuThing.Services.Interfaces
 @inject IUserService UserService
 
-<input type="text" @bind="_userInput" @bind:event="oninput" @onkeyup="DebounceFindUser" placeholder="@(Label ?? "")"/>
+<input name="username" type="text" @bind="_userInput" @bind:event="oninput" @onkeyup="DebounceFindUser" placeholder="@(Label ?? "")"/>
 @if (_userModel is {Username: not null})
 {
     <a href="https://osu.ppy.sh/users/@_userModel.Id" tabindex="-1">
