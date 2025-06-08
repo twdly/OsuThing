@@ -17,11 +17,10 @@
     <input type="text" @bind-value="_scoreCount" @bind-value:event="oninput" @onblur="LimitScoreCount"/>
     <button @onclick="GetScores" disabled="@IsScoreButtonDisabled()">Get scores</button>
     <ul class="button-group">
-        <button @onclick="() => SetScoreType(UserScoreType.Best)">Best</button>
-        <button @onclick="() => SetScoreType(UserScoreType.Recent)">Recent</button>
-        <button @onclick="() => SetScoreType(UserScoreType.Firsts)">Firsts</button>
+        <button @onclick="() => SetScoreType(UserScoreType.Best)" disabled="@(_scoreType == UserScoreType.Best)">Best</button>
+        <button @onclick="() => SetScoreType(UserScoreType.Recent)" disabled="@(_scoreType == UserScoreType.Recent)">Recent</button>
+        <button @onclick="() => SetScoreType(UserScoreType.Firsts)" disabled="@(_scoreType == UserScoreType.Firsts)">Firsts</button>
     </ul>
-    <p>Current selection: @CapitaliseString(_scoreType.ToString())</p>
     <p>@_scoresMessage</p>
 </div>
 @foreach (var score in _scores)

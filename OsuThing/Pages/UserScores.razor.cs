@@ -29,7 +29,7 @@ public partial class UserScores
         var foundScoreCount = _scores.Count();
         _scoresMessage = foundScoreCount == 0
             ? "No scores have been found"
-            : $"The {foundScoreCount} {_scoreType} scores have been found";
+            : $"The {foundScoreCount} {_scoreType.ToString().ToLower()} scores have been found";
         StateHasChanged();
     }
 
