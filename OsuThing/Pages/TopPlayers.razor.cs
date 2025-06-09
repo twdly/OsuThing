@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using OsuThing.Enums;
 using OsuThing.Models;
 using OsuThing.Services.Interfaces;
 
@@ -10,18 +11,26 @@ public partial class TopPlayers
     public required IUserService UserService { get; set; }
 
     private IEnumerable<UserExtendedModel> Users { get; set; } = [];
-    private string Mode { get; set; } = "osu";
+    private string SelectedMode { get; set; } = "osu";
 
-    private async Task SetMode(string mode)
+    private readonly Dictionary<Mode, string> _modeSelections = new()
     {
+        [Mode.Standard] = "osu",
+        [Mode.Mania] = "mania",
+        [Mode.Taiko] = "taiko",
+        [Mode.CTB] = "fruits"
+    };
+
+    private async Task SelectModeCallback(string selectedMode)
+    {
+        SelectedMode = selectedMode;
         Users = [];
-        Mode = mode;
         await GetPlayers();
     }
 
     private async Task GetPlayers()
     {
-        var result = await UserService.GetTopPlayers(Mode);
+        var result = await UserService.GetTopPlayers(SelectedMode);
         Users = result.Users;
     }
     
