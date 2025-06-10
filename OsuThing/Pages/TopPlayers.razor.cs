@@ -11,8 +11,16 @@ public partial class TopPlayers
     public required IUserService UserService { get; set; }
 
     private IEnumerable<UserExtendedModel> Users { get; set; } = [];
-    private string SelectedMode { get; set; } = "osu";
+    private Mode SelectedMode { get; set; } = Mode.Standard;
 
+    private readonly Dictionary<Mode, string> _modeDisplays = new()
+    {
+        [Mode.Standard] = "Standard",
+        [Mode.Mania] = "Mania",
+        [Mode.Taiko] = "Taiko",
+        [Mode.CTB] = "CTB"
+    };
+    
     private readonly Dictionary<Mode, string> _modeSelections = new()
     {
         [Mode.Standard] = "osu",
@@ -21,7 +29,7 @@ public partial class TopPlayers
         [Mode.CTB] = "fruits"
     };
 
-    private async Task SelectModeCallback(string selectedMode)
+    private async Task SelectModeCallback(Mode selectedMode)
     {
         SelectedMode = selectedMode;
         Users = [];
@@ -30,7 +38,7 @@ public partial class TopPlayers
 
     private async Task GetPlayers()
     {
-        var result = await UserService.GetTopPlayers(SelectedMode);
+        var result = await UserService.GetTopPlayers(_modeSelections[SelectedMode]);
         Users = result.Users;
     }
     

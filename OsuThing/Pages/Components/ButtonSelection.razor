@@ -4,17 +4,16 @@
 <div class="selection-buttons">
     @foreach (var selection in ChoiceDict)
     {
-        <button disabled="@(CurrentSelection?.Equals(selection.Key))" @onclick="async () => { await UpdateSelection(selection.Key); }">@Enum.GetName(typeof(Mode), selection.Key)</button>
+        <button disabled="@(CurrentSelection?.Equals(selection.Key))" @onclick="async () => { await UpdateSelection(selection.Key); }">@selection.Value</button>
     }
 </div>
-
 
 @code 
 {
     // This needs to be in the same file as @typeparam
     [Parameter] public required Dictionary<TSelectionEnum, string> ChoiceDict { get; set; }
     [Parameter] public required TSelectionEnum InitialSelection { get; set; }
-    [Parameter] public required EventCallback<string> SelectionCallback { get; set; }
+    [Parameter] public required EventCallback<TSelectionEnum> SelectionCallback { get; set; }
     private TSelectionEnum? CurrentSelection { get; set; }
 
     protected override Task OnInitializedAsync()
@@ -26,6 +25,6 @@
     private async Task UpdateSelection(TSelectionEnum selection)
     {
         CurrentSelection = selection;
-        await SelectionCallback.InvokeAsync(ChoiceDict[selection]);
+        await SelectionCallback.InvokeAsync(selection);
     }
 }

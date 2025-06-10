@@ -4,13 +4,7 @@
 
 <h2>Top Players</h2>
 
-@* <div class="mode-buttons"> *@
-@*     <button disabled="@(Mode == "osu")" @onclick="@(() => SetMode("osu"))">Standard</button> *@
-@*     <button disabled="@(Mode == "mania")" @onclick="@(() => SetMode("mania"))">Mania</button> *@
-@*     <button disabled="@(Mode == "taiko")" @onclick="@(() => SetMode("taiko"))">Taiko</button> *@
-@*     <button disabled="@(Mode == "fruits")" @onclick="@(() => SetMode("fruits"))">CTB</button> *@
-@* </div> *@
-<ButtonSelection TSelectionEnum="Mode" ChoiceDict="_modeSelections" SelectionCallback="SelectModeCallback"></ButtonSelection>
+<ButtonSelection TSelectionEnum="Mode" ChoiceDict="_modeDisplays" SelectionCallback="SelectModeCallback"></ButtonSelection>
 
 @if (!Users.Any())
 {

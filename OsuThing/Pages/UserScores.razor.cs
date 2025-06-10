@@ -9,12 +9,23 @@ public partial class UserScores
 {
     [Inject] private IScoreService ScoreService { get; set; } = null!;
     [Inject] private IUserService UserService { get; set; } = null!;
-    
+
     private IEnumerable<ScoreModel> _scores = [];
     private UserModel? _user;
     private string _scoresMessage = "";
-    private UserScoreType _scoreType = UserScoreType.Best; // Default type is best as most players care primarily about the PP value of their score
+
+    private UserScoreType
+        _scoreType =
+            UserScoreType.Best; // Default type is best as most players care primarily about the PP value of their score
+
     private int? _scoreCount = 100;
+
+    private Dictionary<UserScoreType, string> _typeSelection = new()
+    {
+        [UserScoreType.Best] = "Best",
+        [UserScoreType.Recent] = "Recent",
+        [UserScoreType.Firsts] = "Firsts",
+    };
 
     [SupplyParameterFromQuery] private string? User { get; set; }
     private bool SearchImmediately { get; set; }
