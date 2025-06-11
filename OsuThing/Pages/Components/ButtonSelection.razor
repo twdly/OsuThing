@@ -1,7 +1,10 @@
-@using OsuThing.Enums
 @typeparam TSelectionEnum where TSelectionEnum : Enum
 
 <div class="selection-buttons">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <p>@Label:</p>
+    }
     @foreach (var selection in ChoiceDict)
     {
         <button disabled="@(CurrentSelection?.Equals(selection.Key))" @onclick="async () => { await UpdateSelection(selection.Key); }">@selection.Value</button>
@@ -14,6 +17,7 @@
     [Parameter] public required Dictionary<TSelectionEnum, string> ChoiceDict { get; set; }
     [Parameter] public required TSelectionEnum InitialSelection { get; set; }
     [Parameter] public required EventCallback<TSelectionEnum> SelectionCallback { get; set; }
+    [Parameter] public string? Label { get; set; }
     private TSelectionEnum? CurrentSelection { get; set; }
 
     protected override Task OnInitializedAsync()

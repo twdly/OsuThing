@@ -16,7 +16,11 @@
     <p class="input-label">Number of scores:</p>
     <input type="text" @bind-value="_scoreCount" @bind-value:event="oninput" @onblur="LimitScoreCount"/>
     <button @onclick="GetScores" disabled="@IsScoreButtonDisabled()">Get scores</button>
-    <ButtonSelection TSelectionEnum="UserScoreType" InitialSelection="UserScoreType.Best" SelectionCallback="SetScoreType" ChoiceDict="_typeSelection"/>
+    <ButtonSelection TSelectionEnum="UserScoreType" 
+                     InitialSelection="UserScoreType.Best" 
+                     SelectionCallback="SetScoreType" 
+                     ChoiceDict="_typeSelection"
+                     Label="Type"/>
     <p>@_scoresMessage</p>
 </div>
 @foreach (var score in _scores)
