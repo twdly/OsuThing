@@ -3,5 +3,5 @@ button + button {
 }
 
 .selection-buttons {
-    padding-bottom: 1rem;
+    padding: 0.5rem 0.5rem 0.5rem 0;
 }
