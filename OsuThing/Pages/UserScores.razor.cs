@@ -14,17 +14,25 @@ public partial class UserScores
     private UserModel? _user;
     private string _scoresMessage = "";
 
-    private UserScoreType
-        _scoreType =
-            UserScoreType.Best; // Default type is best as most players care primarily about the PP value of their score
-
+    private UserScoreType _scoreType = UserScoreType.Best; // Default type is best as most players care primarily about the PP value of their score
+    private Mode _selectedMode = Mode.Standard;
+    
     private int? _scoreCount = 100;
 
-    private Dictionary<UserScoreType, string> _typeSelection = new()
+    private readonly Dictionary<UserScoreType, string> _typeSelection = new()
     {
         [UserScoreType.Best] = "Best",
         [UserScoreType.Recent] = "Recent",
         [UserScoreType.Firsts] = "Firsts",
+    };
+
+    private readonly Dictionary<Mode, string> _modeSelections = new()
+    {
+        [Mode.Standard] = "Standard",
+        [Mode.Mania] = "Mania",
+        // Taiko doesn't work because of a different scoring system
+        // [Mode.Taiko] = "Taiko",
+        [Mode.CTB] = "CTB"
     };
 
     [SupplyParameterFromQuery] private string? User { get; set; }
@@ -35,7 +43,7 @@ public partial class UserScores
         LimitScoreCount();
         if (_scoreCount != null && _user != null)
         {
-            _scores = await ScoreService.GetUserScores(_user.Id.ToString(), _scoreType, _scoreCount.Value) ?? [];
+            _scores = await ScoreService.GetUserScores(_user.Id.ToString(), _scoreType, _selectedMode, _scoreCount.Value) ?? [];
         }
         var foundScoreCount = _scores.Count();
         _scoresMessage = foundScoreCount == 0
@@ -52,6 +60,11 @@ public partial class UserScores
     private void SetScoreType(UserScoreType type)
     {
         _scoreType = type;
+    }
+
+    private void SetMode(Mode mode)
+    {
+        _selectedMode = mode;
     }
 
     private void LimitScoreCount()
@@ -71,13 +84,6 @@ public partial class UserScores
         if (!SearchImmediately) return;
         SearchImmediately = false;
         await GetScores();
-    }
-
-    private static string CapitaliseString(string stringToCapitalise)
-    {
-        var capital = stringToCapitalise[0];
-        var remaining = stringToCapitalise[1..];
-        return char.ToUpper(capital) + remaining;
     }
 
     protected override Task OnInitializedAsync()

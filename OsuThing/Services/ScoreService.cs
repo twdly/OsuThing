@@ -9,13 +9,21 @@ namespace OsuThing.Services;
 public class ScoreService(IApiService apiService) : IScoreService
 {
     private IApiService ApiService { get; } = apiService;
+
+    private Dictionary<Mode, string> _apiModeNames = new()
+    {
+        [Mode.Standard] = "osu",
+        [Mode.CTB] = "fruits",
+        [Mode.Mania] = "mania",
+        [Mode.Taiko] = "taiko"
+    };
     
-    public async Task<IEnumerable<ScoreModel>?> GetUserScores(string userName, UserScoreType type, int count)
+    public async Task<IEnumerable<ScoreModel>?> GetUserScores(string userName, UserScoreType type, Mode mode, int count)
     {
         var requestParams = $"users/{userName}/scores/{type.ToString().ToLower()}";
         var query = new NameValueCollection
         {
-            ["mode"] = "osu",
+            ["mode"] = _apiModeNames[mode],
             ["limit"] = count.ToString()
         };
         return await ApiService.GetAsync<IEnumerable<ScoreModel>>(requestParams, query);
