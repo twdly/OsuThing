@@ -30,8 +30,7 @@ public partial class UserScores
     {
         [Mode.Standard] = "Standard",
         [Mode.Mania] = "Mania",
-        // Taiko doesn't work because of a different scoring system
-        // [Mode.Taiko] = "Taiko",
+        [Mode.Taiko] = "Taiko",
         [Mode.CTB] = "CTB"
     };
 
