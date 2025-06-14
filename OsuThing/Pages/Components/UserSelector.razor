@@ -4,8 +4,16 @@
 <input name="username" type="text" @bind="_userInput" @bind:event="oninput" @onkeyup="DebounceFindUser" placeholder="@(Label ?? "")"/>
 @if (_userModel is {Username: not null})
 {
-    <a href="https://osu.ppy.sh/users/@_userModel.Id" tabindex="-1">
-        <h4>@_userModel.Username</h4>
-        <img src="@_userModel.Avatar" alt="Avatar for @_userModel.Username" class="avatar"/>
-    </a>
+    <div class="selected-user">
+        <a href="https://osu.ppy.sh/users/@_userModel.Id" tabindex="-1">
+            <img src="@_userModel.Avatar" alt="Avatar for @_userModel.Username" class="avatar"/>
+        </a>
+        <div class="user-info">
+            <a href="https://osu.ppy.sh/users/@_userModel.Id" tabindex="-1">
+                <h4>@_userModel.Username</h4>
+            </a>
+            <p>PP: @_userModel.Stats?.Pp</p>
+            <p>Rank: @_userModel.Stats?.Rank</p>
+        </div>
+    </div>
 }

@@ -7,10 +7,6 @@
 
 <div class="user-input">
     <UserSelector HandleUserFound="HandleUserSelected" InitialValue="@(User ?? "")" Label="Username:"/>
-    @if (_user is { Stats: not null })
-    {
-        <p>PP: @_user.Stats.Pp</p>
-    }
 </div>
 <div class="score-input">
     <p class="input-label">Number of scores:</p>
