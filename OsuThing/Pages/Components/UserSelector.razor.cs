@@ -16,14 +16,14 @@ public partial class UserSelector : IDisposable
     [Parameter]
     public string? InitialValue { get; set; }
 
-    private Timer? _debounceTimer = null;
+    private Timer? _debounceTimer;
     private string? _userInput = "";
 
     private UserModel? _userModel;
     
-    private async void FindUserForTimer(object? sender, ElapsedEventArgs e)
+    private void FindUserForTimer(object? sender, ElapsedEventArgs e)
     {
-        await FindUser();
+        _ = FindUser();
     }
 
     private async Task FindUser()
