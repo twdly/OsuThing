@@ -1,6 +1,6 @@
 @using OsuThing.Models
 <div>
-    @if (Score is { BeatmapSet: not null })
+    @if (Score is not null)
     {
         <img src="@Score.BeatmapSet.Covers.Cover" alt="Beatmap image for @Score.BeatmapSet.Title" class="cover-img"/>
         <h3>
@@ -19,7 +19,7 @@
         <p>Accuracy of @Score.GetRoundedAccuracy()% and max combo of @Score.MaxCombo for a PP value of @Score.Pp</p>
     }
     <a href="comparison?beatmapId=@Score.Beatmap.DiffId&username=@Username">
-        <p>Compare</p>
+        Compare
     </a>
 </div>
 
