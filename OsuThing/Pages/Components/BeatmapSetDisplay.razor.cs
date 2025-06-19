@@ -10,7 +10,7 @@ public partial class BeatmapSetDisplay : ComponentBase
     [Parameter] public required EventCallback<int> SelectDiffCallback { get; set; }
      private IEnumerable<IGrouping<string, BeatmapModel>> Difficulties { get; set; } = [];
 
-     private Dictionary<string, string> _displayNames = new()
+     private readonly Dictionary<string, string> _displayNames = new()
      {
          ["osu"] = "Standard",
          ["taiko"] = "Taiko",

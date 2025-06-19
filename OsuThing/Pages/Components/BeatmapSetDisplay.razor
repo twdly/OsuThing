@@ -7,7 +7,7 @@
         {
             <div class="mode-section">
                 <p class="mode-name">@_displayNames[mode.Key]</p>
-                @foreach (var diff in mode.Select(x => x).ToList())
+                @foreach (var diff in mode.Select(x => x).OrderBy(x => x.Difficulty).ToList())
                 {
                     @if (IsChildComponent)
                     {
