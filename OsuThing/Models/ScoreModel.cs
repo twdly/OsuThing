@@ -7,6 +7,7 @@ public class ScoreModel
     [JsonPropertyName("accuracy")] public double Accuracy { get; init; } = -1;
     [JsonPropertyName("pp")] public double? Pp { get; set; } = -1;
     [JsonPropertyName("max_combo")] public int MaxCombo { get; init; } = -1;
+    [JsonPropertyName("perfect")] public bool FullCombo { get; set; }
     [JsonPropertyName("beatmap")] public BeatmapModel? Beatmap { get; set; }
     [JsonPropertyName("beatmapset")] public BeatmapSetModel BeatmapSet { get; set; } = new();
     [JsonPropertyName("mods")] public List<string> Mods { get; init; } = [];

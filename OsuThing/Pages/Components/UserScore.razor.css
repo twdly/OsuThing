@@ -5,3 +5,8 @@ p {
 img {
     padding-top: 1rem;
 }
+
+.fc {
+    color: forestgreen;
+    font-weight: bold;
+}

@@ -10,14 +10,11 @@
         </h3>
     }
     <p>@Score!.Beatmap!.Difficulty* (@Score.GetModsAsString())</p>
-    @if (Score.Pp == null)
-    {
-        <p>Accuracy of @Score.GetRoundedAccuracy()% and max combo of @Score.MaxCombo but no PP :(</p>
-    }
-    else
-    {
-        <p>Accuracy of @Score.GetRoundedAccuracy()% and max combo of @Score.MaxCombo for a PP value of @Score.Pp</p>
-    }
+    <p>
+        Accuracy of @Score.GetRoundedAccuracy()% and max combo of 
+        <span class="@(Score.FullCombo ? "fc" : "")">@Score.MaxCombo</span> 
+        @(Score.Pp == null ? "but no PP :(" : $"for a PP value of {Score.Pp}")
+    </p>
     <a href="comparison?beatmapId=@Score.Beatmap.DiffId&username=@Username">
         Compare
     </a>
