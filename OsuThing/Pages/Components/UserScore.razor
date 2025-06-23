@@ -11,9 +11,15 @@
     }
     <p>@Score!.Beatmap!.Difficulty* (@Score.GetModsAsString())</p>
     <p>
-        Accuracy of @Score.GetRoundedAccuracy()% and max combo of 
-        <span class="@(Score.FullCombo ? "fc" : "")">@Score.MaxCombo</span> 
-        @(Score.Pp == null ? "but no PP :(" : $"for a PP value of {Score.Pp}")
+        Accuracy: @Score.GetRoundedAccuracy()% 
+        Combo: <span class="@(Score.FullCombo ? "fc" : "")">@(Score.MaxCombo)x</span>
+        PP: @(Score.Pp == null ? "None" : Score.Pp)
+    </p>
+    <p>
+        300s: @Score.ScoreStats.ThreeHundreds
+        100s: @Score.ScoreStats.Hundreds
+        50s: @Score.ScoreStats.Fifties
+        Misses: @Score.ScoreStats.Misses
     </p>
     <a href="comparison?beatmapId=@Score.Beatmap.DiffId&username=@Username">
         Compare
