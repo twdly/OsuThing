@@ -12,17 +12,11 @@ button {
 
 .user-input-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 
 .selected-map {
     display: flex;
     flex-direction: column;
-}
-
-@media (min-width: 864px) {
-    .user-input + .user-input {
-        padding-left: 1rem;
-    }
 }
