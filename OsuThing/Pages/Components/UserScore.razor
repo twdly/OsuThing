@@ -1,15 +1,12 @@
 @using OsuThing.Models
 <div>
-    @if (Score is not null)
-    {
-        <img src="@Score.BeatmapSet.Covers.Cover" alt="Beatmap image for @Score.BeatmapSet.Title" class="cover-img"/>
-        <h3>
-            <a href="https://osu.ppy.sh/beatmapsets/@Score.BeatmapSet.Id/#osu/@Score.Beatmap!.DiffId">@Score.BeatmapSet.Title
-                <span class="diffName"> - [@Score.Beatmap.DiffName]</span>
-            </a>
-        </h3>
-    }
-    <p>@Score!.Beatmap!.Difficulty* (@Score.GetModsAsString())</p>
+    <img src="@Score.BeatmapSet.Covers.Cover" alt="Beatmap image for @Score.BeatmapSet.Title" class="cover-img"/>
+    <h3>
+        <a href="https://osu.ppy.sh/beatmapsets/@Score.BeatmapSet.Id/#osu/@Score.Beatmap!.DiffId">@Score.BeatmapSet.Title
+            <span class="diffName"> - [@Score.Beatmap.DiffName]</span>
+        </a>
+    </h3>
+    <p>@Score.Beatmap!.Difficulty* (@Score.GetModsAsString())</p>
     <p>
         Accuracy: @Score.GetRoundedAccuracy()% 
         Combo: <span class="@(Score.FullCombo ? "fc" : "")">@(Score.MaxCombo)x</span>
@@ -28,6 +25,6 @@
 
 @code
 {
-    [Parameter] public ScoreModel? Score { get; set; }
+    [Parameter] public required ScoreModel Score { get; set; }
     [Parameter] public string Username { get; set; } = "";
 }
